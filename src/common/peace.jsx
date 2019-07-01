@@ -33,6 +33,3 @@ class Peace extends Component {
 }
 
 export default Peace;
-// <i className={peaceIcon} aria-hidden="true" />
-
-//<FontAwesomeIcon icon={faCoffee} />
