@@ -7,7 +7,7 @@ const trailCards = [
     publishDate: "2018-01-03T19:04:28.809Z",
     coverPhoto: "/images/skandagiri.jpeg",
     coverPhotoUploader: "Sujish",
-    peaceMakers: 214
+    peaceCount: 214
   },
 
   {
@@ -18,7 +18,7 @@ const trailCards = [
     publishDate: "2018-01-03T19:04:28.809Z",
     coverPhoto: "/images/thekkadi.jpeg",
     coverPhotoUploader: "Amrutha",
-    peaceMakers: 315
+    peaceCount: 315
   },
 
   {
@@ -29,7 +29,7 @@ const trailCards = [
     publishDate: "2018-01-03T19:04:28.809Z",
     coverPhoto: "/images/ziro.jpeg",
     coverPhotoUploader: "Kiran",
-    peaceMakers: 450
+    peaceCount: 450
   },
 
   {
@@ -40,7 +40,7 @@ const trailCards = [
     publishDate: "2018-01-03T19:04:28.809Z",
     coverPhoto: "/images/kodai.jpeg",
     coverPhotoUploader: "Raihan",
-    peaceMakers: 157
+    peaceCount: 157
   }
 ];
 

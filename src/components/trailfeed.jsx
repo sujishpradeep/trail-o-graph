@@ -2,21 +2,31 @@ import React, { Component } from "react";
 import "font-awesome/css/font-awesome.min.css";
 import TrailCard from "./trailcard";
 import { getTrails } from "../services/testTrailCards";
-import { getUserPeaceState } from "../services/testUserInfoDb";
+import { getUserInfoById } from "../services/testUserInfoDb";
 import "../App.css";
 
 class TrailFeed extends Component {
-  state = { trailCards: [], peaceStates: [] };
+  state = { trailCards: [], userInfo: [] };
 
   componentDidMount() {
     const trailCards = getTrails();
-    this.setState({ trailCards });
-    const peaceStates = getUserPeaceState("P1");
-    this.setState({ peaceStates });
+    const userInfo = getUserInfoById("P1");
+    this.setState({ trailCards, userInfo });
   }
 
+  /*If input trail ID  IS present in userArray -> remove it from the user Array
+    If input trail ID NOT present in userArray -> Add it to the user Array*/
+  addOrRemoveFromArray = (userArray, trailId) => {
+    if (userArray.includes(trailId)) {
+      userArray.splice(userArray.indexOf(trailId));
+    } else {
+      userArray.push(trailId);
+    }
+    return userArray;
+  };
+
   render() {
-    const { trailCards, peaceStates } = this.state;
+    const { trailCards, userInfo } = this.state;
 
     return (
       <React.Fragment>
@@ -24,30 +34,42 @@ class TrailFeed extends Component {
           <TrailCard
             key={trailCard._id}
             trailCard={trailCard}
-            peaceState={peaceStates.includes(trailCard._id)}
+            userInfo={userInfo}
             onPeaceClick={this.handlePeaceClick}
+            onBookMarkClick={this.handleBookMarkClick}
           />
         ))}
       </React.Fragment>
     );
   }
 
+  // update peaceCount of trailCard and peaceMarked array of userInfo on peaceClick
   handlePeaceClick = trailId => {
-    const originalTrailCards = this.state.trailCards;
-    const peaceStates = this.state.peaceStates;
-    const counter = peaceStates.includes(trailId) ? -1 : 1;
+    const { trailCards, userInfo } = this.state;
 
-    const index = originalTrailCards.findIndex(t => t._id === trailId);
-    originalTrailCards[index].peaceMakers += counter;
-    const trailCards = originalTrailCards;
+    let userPeaceMarked = userInfo.peaceMarked;
 
-    if (counter === 1) {
-      peaceStates.push(trailId);
-    } else {
-      peaceStates.splice(peaceStates.indexOf(trailId));
-    }
+    //onPeaceClick -> add 1 to peaceCount of the trail, if user has not peaceMarked in original State,
+    //                reduce 1 from peaceCount if user has already peaceMarked in original State
+    const counter = userPeaceMarked.includes(trailId) ? -1 : 1;
+    const index = trailCards.findIndex(t => t._id === trailId);
+    trailCards[index].peaceCount += counter;
 
-    this.setState({ trailCards, peaceStates });
+    userPeaceMarked = this.addOrRemoveFromArray(userPeaceMarked, trailId);
+    userInfo.peaceMarked = userPeaceMarked;
+
+    this.setState({ trailCards, userInfo });
+  };
+
+  // update bookMarked array of userInfo on bookMarkClick
+  handleBookMarkClick = trailId => {
+    const { userInfo } = this.state;
+    let userBookMarked = userInfo.bookMarked;
+
+    userBookMarked = this.addOrRemoveFromArray(userBookMarked, trailId);
+    userInfo.bookMarked = userBookMarked;
+
+    this.setState({ userInfo });
   };
 }
 

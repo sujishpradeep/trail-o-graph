@@ -1,14 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
-class TrailPicMain extends Component {
-  state = {};
-  render() {
-    return (
-      <div className="trail-pic-main">
-        <img src={this.props.coverPhoto} alt="Trail Main" />
-      </div>
-    );
-  }
-}
+const TrailPicMain = ({ coverPhoto }) => {
+  return (
+    <div className="trail-pic-main">
+      <img src={coverPhoto} alt="Trail Main" />
+    </div>
+  );
+};
 
 export default TrailPicMain;

@@ -1,97 +1,54 @@
 :root {
-  --main-bg-color: coral;
-  --main-txt-color: blue;
   --main-color-2: white;
-  --main-color-1: #f6f0ec;
+
+  --header-color-2: white;
+  --filterbar-background-color: white;
+  --filter-color: #875555;
+  --filter-background-color: rgb(27, 25, 25);
   --cards-border: 1.4px;
-  --profile-border: #d5d1cc;
-  --header-color: #875555;
+  --banner-text: rgb(231, 236, 208);
+  --banner-underline: rgb(243, 234, 234);
+  --banner-para: #f1ecec;
+  --filterbar-background: #f1ecec;
+
+  --main-primary-0: #875555;
+  --main-primary-1: #d6a9a9;
+  --main-primary-2: #ac7878;
+  --main-primary-3: #633232;
+  --main-primary-4: #551c1c;
+
+  --main-secondary-1-0: #876c55;
+  --main-secondary-1-1: #623a19;
+  --main-secondary-1-2: #734b2a;
+  --main-secondary-1-3: #45392f;
+  --main-secondary-1-4: #382c22;
+
+  --main-secondary-2-0: #6c445b;
+  --main-secondary-2-1: #4f1435;
+  --main-secondary-2-2: #5c2243;
+  --main-secondary-2-3: #37252f;
+  --main-secondary-2-4: #2d1b25;
+
+  --main-complement-0: #446c44;
+  --main-complement-1: #144e14;
+  --main-complement-2: #215c21;
+  --main-complement-3: #253725;
+  --main-complement-4: #1b2c1b;
 }
 
 body {
   margin: 0;
-  background-color: rgb(235, 230, 224);
-}
-
-img {
-  width: 100%;
-  display: block;
-}
-
-p {
-  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
-  color: #444;
-  font-size: 25px;
-  vertical-align: baseline;
-  text-align: left;
-  font-weight: 200px;
-  border: 0;
-  background: transparent;
-}
-
-.grid-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: 1vw;
-  margin-right: 1vw;
-}
-
-.grid-item {
-  width: 100vw;
-  margin: 0 0 1.5vw 0;
-  border-radius: 1vw;
-}
-.grid-item:last-child {
-  margin-bottom: 30px;
-}
-
-@media (min-width: 600px) {
-  .grid-item {
-    width: 45vw;
-    margin: 1.5vw;
-  }
-}
-@media (min-width: 900px) {
-  .grid-item {
-    width: 30vw;
-    margin: 1.5vw;
-  }
-}
-@supports (display: grid) {
-  .grid-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 1rem;
-  }
-
-  @media (min-width: 600px) {
-    .grid-container {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (min-width: 900px) {
-    .grid-container {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  .grid-item {
-    margin: 0;
-    width: auto;
-  }
+  background-color: var(--main-color-2);
 }
 
 @import url(https://fonts.googleapis.com/css?family=Oswald);
 
-* {
-  margin: auto;
-}
-
 #navbarul {
-  background-color: #4a4a4a;
-  border-bottom: solid var(--header-color);
-  border-width: 10px;
-  height: 100px;
+  background-color: var(--header-color-2);
+  border-bottom: solid var(--main-primary-0);
+  border-top: solid var(--main-primary-0);
+  border-width: 5px;
+  height: 80px;
   word-spacing: 70px;
   text-align: center;
 }
@@ -101,25 +58,27 @@ a {
   font-size: 40px;
   text-align: center;
   text-decoration: none;
-  color: var(--header-color);
+  color: var(--main-primary-0);
   transition: ease-out 0.2s;
 }
 
 #navbarli {
   display: inline-block;
-  margin-top: 15px;
+  margin: 3px;
   text-decoration: none;
   transition: ease-out 0.5s;
 }
 
 #navbarli a:hover {
-  background-color: var(--header-color);
-  color: #4a4a4a;
-  padding-top: 500px;
-  padding-bottom: 30px;
+  background-color: var(--main-primary-0);
+  color: var(--header-color-2);
+  padding-top: 0px;
+  padding-bottom: 20px;
   padding-right: 20px;
   padding-left: 20px;
-  transition: ease-out 0.5s;
+  border-top: solid var(--header-color-2);
+  border-radius: 8px;
+  transition: ease-out 0.7s;
 }
 
 /*  banner */
@@ -132,16 +91,19 @@ a {
   background-position: right;
   color: black !important;
   background-attachment: fixed;
-  margin-bottom: 1.5vw;
   margin-left: 5vw;
   margin-right: 5vw;
   border-radius: 3vw;
   box-shadow: 0 0 5px;
-  box-shadow: var(--header-color);
+  box-shadow: var(--main-primary-0);
+}
+.bannerOuter {
+  background-color: var(--main-color-2);
+  margin-top: 0px;
 }
 
 .brand-banner {
-  padding: 100px 0;
+  padding: 100px 0px;
   position: top;
   align-items: top;
   border-bottom: black;
@@ -155,45 +117,23 @@ a {
   font-size: 50px;
   line-height: 43px;
   text-transform: uppercase;
-  color: rgb(216, 210, 132);
+  color: var(--banner-text);
   display: inline-block;
   text-align: center;
-  margin: auto;
   width: 100%;
-  margin-top: 0px;
-  margin-bottom: 16px;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
 }
 
 .brand-banner__header div:last-child {
-  border-bottom: 11px solid rgb(22, 151, 151);
+  border-bottom: 5px solid var(--banner-underline);
   display: inline-block;
-  padding: 12px 0 11px;
+  padding: 2px 0 2px;
 }
 
 .brand-banner__subheader {
-  font-family: Fakt, AvenirNext-Medium, Segoe UI, sans-serif;
+  font-family: osWald;
   font-weight: 500;
   font-size: 30px;
-  color: snow;
-  margin-bottom: 32px;
-  opacity: 0.8;
-}
-
-b {
-  margin: 0;
-  line-height: 1.4;
-}
-
-b {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  color: var(--banner-para);
 }
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
@@ -205,13 +145,13 @@ body {
 
 .trail-container {
   overflow: hidden;
-  margin: 60px auto;
+  margin: 15px auto;
   min-width: 180px;
   max-width: 600px;
   max-height: 1000px;
   border-radius: 8px;
   background: var(--main-color-2);
-  border: solid var(--header-color);
+  border: solid var(--main-primary-4);
   border-width: var(--cards-border) var(--cards-border);
 }
 
@@ -223,7 +163,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 2px 2px;
-  border-bottom: solid var(--header-color);
+  border-bottom: solid var(--main-primary-4);
   border-bottom-width: var(--cards-border);
 }
 
@@ -262,7 +202,7 @@ body {
   padding: 8px;
   width: 64px;
   height: 64px;
-  border: 1px solid var(--header-color);
+  border: 1px solid var(--main-primary-4);
   border-radius: 60px;
   transition: all 0.3s ease-in-out;
   transform: scale(0.95);
@@ -297,7 +237,7 @@ body {
   padding: 0;
   width: 100%;
   background: var(--main-color-2);
-  border-top: solid var(--header-color);
+  border-top: solid var(--main-primary-4);
   border-top-width: var(--cards-border);
   font-size: 30px;
 }
@@ -306,17 +246,82 @@ body {
   flex: 1 1 100px;
   padding: 12px;
   height: 60px;
-  color: #807365;
+  color: var(--main-primary-4);
   text-align: center;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
 #trailPostSpan:hover {
-  background: #f0e6df;
   cursor: pointer;
 }
 
 .peaceContainer {
-  border-right: solid var(--header-color);
+  border-right: solid var(--main-primary-4);
   border-right-width: var(--cards-border);
+}
+
+#bookmark {
+  align-content: flex-end;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+
+.filterBar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 15px 0px;
+  padding: 8px;
+  background: var(--filterbar-background);
+  /* border: solid 1.4px;
+   border-radius: 8px;*/
+}
+
+.filter {
+  color: var(--filter-color);
+  margin-right: 10px;
+  padding: 6px 12px;
+  background: var(--main-color-2);
+  font-size: 16px;
+  font-weight: 100;
+  border-radius: 4px;
+  border: 1.4px solid var(--filter-color);
+  font-family: Oswald;
+  opacity: 0.7;
+  word-spacing: 1.5px;
+  letter-spacing: 1px;
+}
+.filter:hover {
+  color: var(--filter-background-color);
+  background: var(--filter-color);
+  opacity: 1;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.filter.isActive {
+  color: var(--filter-background-color);
+  background: var(--filter-color);
+  opacity: 1;
+}
+.filter:active,
+.filter:focus {
+  color: var(--main-primary-4);
+  background: var(--filter-color);
+  opacity: 1;
+  outline: none;
+}
+
+.filter-bookmark {
+  color: var(--main-primary-4);
+  background-color: var(--main-color-2);
+  padding: 1px 3px -2px 3px;
+  border-radius: 4px;
+  border: 1.4px solid var(--main-primary-4);
+  margin-right: 10px;
+}
+
+.filter-bookmark:focus {
+  outline: none;
 }
