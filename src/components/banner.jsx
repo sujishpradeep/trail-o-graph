@@ -2,7 +2,7 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <div class="bannerOuter">
+    <div className="bannerOuter">
       <section id="banner">
         <header className="brand-banner small-screen-desktop">
           <h1 className="brand-banner__header">

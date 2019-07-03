@@ -9,22 +9,24 @@ const TrailCard = ({ trailCard, userInfo, onPeaceClick, onBookMarkClick }) => {
 
   return (
     <div>
-      <section className="trail-container">
-        <TrailHeader
-          trailName={trailCard.name}
-          state={trailCard.state}
-          height={trailCard.height}
-        />
-        <TrailPicMain coverPhoto={trailCard.coverPhoto} />
-        <TrailStats
-          trailId={trailCard._id}
-          peaceCount={trailCard.peaceCount}
-          peaceMarked={peaceMarked}
-          bookMarked={bookMarked}
-          onPeaceClick={onPeaceClick}
-          onBookMarkClick={onBookMarkClick}
-        />
-      </section>
+      <div className="trail-feed-container">
+        <section className="trail-container">
+          <TrailHeader
+            trailName={trailCard.name}
+            state={trailCard.state}
+            height={trailCard.height}
+          />
+          <TrailPicMain coverPhoto={trailCard.coverPhoto} />
+          <TrailStats
+            trailId={trailCard._id}
+            peaceCount={trailCard.peaceCount}
+            peaceMarked={peaceMarked}
+            bookMarked={bookMarked}
+            onPeaceClick={onPeaceClick}
+            onBookMarkClick={onBookMarkClick}
+          />
+        </section>
+      </div>
     </div>
   );
 };

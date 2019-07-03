@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
-import { faBookmark as faBookReg } from "@fortawesome/free-regular-svg-icons";
+//import { faBookmark as faBookReg } from "@fortawesome/free-regular-svg-icons";
 
 class BookMarked extends Component {
   state = {};
   render() {
-    const bookMarked = true;
-    const bookMarkedCheck = bookMarked ? faBookmark : faBookReg;
+    let filterbookMarkicon = this.props.showBookMarked
+      ? "filterbookMarkiconactive"
+      : "filterbookMarkiconinactive";
+
+    filterbookMarkicon = "filter-bookmark " + filterbookMarkicon;
+
     return (
       <div>
-        <button class="filter-bookmark">
-          <FontAwesomeIcon icon={bookMarkedCheck} />
+        <button className={filterbookMarkicon}>
+          <FontAwesomeIcon icon={faBookmark} className="bookMarkedShadow" />
         </button>
       </div>
     );

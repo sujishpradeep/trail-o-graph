@@ -1,17 +1,27 @@
 :root {
   --main-color-2: white;
 
-  --header-color-2: white;
-  --filterbar-background-color: white;
+  --header-color-2: #6c445b;
+  /*--header-color-2: rgb(248, 236, 236); #6c445b*/
+
+  /* saved colors 
+    very light grey rgb(246, 247, 240);
+    #f7f7e2;
+    
+  */
+
   --filter-color: #875555;
   --filter-background-color: rgb(27, 25, 25);
   --cards-border: 1.4px;
-  --banner-text: rgb(231, 236, 208);
-  --banner-underline: rgb(243, 234, 234);
-  --banner-para: #f1ecec;
-  --filterbar-background: #f1ecec;
+  --banner-text: #ac7878;
+  --banner-underline: #6c445b;
+  --banner-para: #876c55;
+  --filterbar-background: white;
+  --trail-header-p: #1b2c1b;
+  --trail-header-h3: #6c445b;
+  --trail-feed-background: rgb(246, 247, 240);
 
-  --main-primary-0: #875555;
+  --main-primary-0: rgb(253, 239, 239);
   --main-primary-1: #d6a9a9;
   --main-primary-2: #ac7878;
   --main-primary-3: #633232;
@@ -38,39 +48,40 @@
 
 body {
   margin: 0;
-  background-color: var(--main-color-2);
+  background-color: #f7f7e2;
 }
 
 @import url(https://fonts.googleapis.com/css?family=Oswald);
 
 #navbarul {
   background-color: var(--header-color-2);
-  border-bottom: solid var(--main-primary-0);
-  border-top: solid var(--main-primary-0);
-  border-width: 5px;
+  /* border-bottom: solid var( --main-color-2);
+  border-top: solid var( --main-color-2);
+  border-width: 3px;*/
+
   height: 80px;
   word-spacing: 70px;
   text-align: center;
+  box-shadow: 0px 0px 2px;
+  box-shadow: #f0dcdc;
 }
 
-a {
+#navbarul a {
   font-family: Oswald;
   font-size: 40px;
   text-align: center;
   text-decoration: none;
-  color: var(--main-primary-0);
+  color: var(--main-color-2);
   transition: ease-out 0.2s;
 }
-
 #navbarli {
   display: inline-block;
-  margin: 3px;
   text-decoration: none;
   transition: ease-out 0.5s;
 }
 
 #navbarli a:hover {
-  background-color: var(--main-primary-0);
+  background-color: var(--main-color-2);
   color: var(--header-color-2);
   padding-top: 0px;
   padding-bottom: 20px;
@@ -78,35 +89,34 @@ a {
   padding-left: 20px;
   border-top: solid var(--header-color-2);
   border-radius: 8px;
+  box-shadow: 0px 0px 1px;
+  box-shadow: var(--main-color-2);
   transition: ease-out 0.7s;
 }
 
 /*  banner */
 
 #banner {
-  background-color: #fff;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url(banner.jpeg);
-  background-size: cover;
-  background-position: right;
-  color: black !important;
-  background-attachment: fixed;
-  margin-left: 5vw;
-  margin-right: 5vw;
-  border-radius: 3vw;
-  box-shadow: 0 0 5px;
-  box-shadow: var(--main-primary-0);
+  /*background-color: #b2bbb2;*/
+  background-image: url(snow_1.jpeg);
+  /* background-size: cover;*/
+  background-position: left;
+  /*background-attachment: fixed;*/
+  background-repeat: no-repeat;
+  background-size: auto;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  border: solid 7px var(--main-primary-3);
+  border-radius: 2vw;
+  padding-bottom: 80px;
 }
 .bannerOuter {
-  background-color: var(--main-color-2);
   margin-top: 0px;
 }
-
 .brand-banner {
   padding: 100px 0px;
   position: top;
   align-items: top;
-  border-bottom: black;
   text-align: center;
   margin-top: 0px;
 }
@@ -125,6 +135,7 @@ a {
 
 .brand-banner__header div:last-child {
   border-bottom: 5px solid var(--banner-underline);
+
   display: inline-block;
   padding: 2px 0 2px;
 }
@@ -143,9 +154,18 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.feedBackground {
+  background-color: var(--trail-feed-background);
+  padding: 15px;
+}
+
+.trail-feed-container {
+  padding: 15px;
+}
+
 .trail-container {
   overflow: hidden;
-  margin: 15px auto;
+  margin: 0px auto;
   min-width: 180px;
   max-width: 600px;
   max-height: 1000px;
@@ -176,18 +196,19 @@ body {
 
 .trail-header .trail-info h3 {
   display: block;
-  color: #5c5146;
+  color: var(--trail-header-h3);
   text-decoration: none;
   transition: all 0.3s ease-in-out;
-  margin: 0;
+
   font-weight: 600;
   font-size: 28px;
 }
 
 .trail-header .trail-info p {
   margin: 4px;
-  color: #908374;
+  color: var(--trail-header-p);
   font-size: 17px;
+  font-weight: bold;
 }
 
 .profile-picture {
@@ -221,7 +242,6 @@ body {
   overflow: hidden;
   max-height: 780px;
   height: 100vw;
-  background: #eee;
 }
 .trail-pic-main img {
   position: absolute;
@@ -251,6 +271,7 @@ body {
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
+
 #trailPostSpan:hover {
   cursor: pointer;
 }
@@ -272,56 +293,39 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  margin: 15px 0px;
-  padding: 8px;
-  background: var(--filterbar-background);
-  /* border: solid 1.4px;
-   border-radius: 8px;*/
-}
 
-.filter {
-  color: var(--filter-color);
-  margin-right: 10px;
-  padding: 6px 12px;
-  background: var(--main-color-2);
-  font-size: 16px;
-  font-weight: 100;
-  border-radius: 4px;
-  border: 1.4px solid var(--filter-color);
-  font-family: Oswald;
-  opacity: 0.7;
-  word-spacing: 1.5px;
-  letter-spacing: 1px;
-}
-.filter:hover {
-  color: var(--filter-background-color);
-  background: var(--filter-color);
-  opacity: 1;
-  cursor: pointer;
-  transition: 0.5s;
-}
-.filter.isActive {
-  color: var(--filter-background-color);
-  background: var(--filter-color);
-  opacity: 1;
-}
-.filter:active,
-.filter:focus {
-  color: var(--main-primary-4);
-  background: var(--filter-color);
-  opacity: 1;
-  outline: none;
+  margin: 15px 0px 0px 0px;
+  padding: 15px 0px;
+  background: var(--filterbar-background);
+  /* border-bottom: 2px solid #876c55;
+  border-top: 2px solid #876c55;
+  */
 }
 
 .filter-bookmark {
   color: var(--main-primary-4);
   background-color: var(--main-color-2);
-  padding: 1px 3px -2px 3px;
   border-radius: 4px;
   border: 1.4px solid var(--main-primary-4);
-  margin-right: 10px;
+  margin-right: 35px;
+  box-shadow: 0px 0px 3px;
+  box-shadow: black;
+}
+
+.filterbookMarkiconactive {
+  opacity: 1;
+}
+
+.filterbookMarkiconinactive {
+  opacity: 0.6;
 }
 
 .filter-bookmark:focus {
   outline: none;
+}
+
+/************* TRAIL LINK **********/
+
+a {
+  text-decoration: none !important;
 }

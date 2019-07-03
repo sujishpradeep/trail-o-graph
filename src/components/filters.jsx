@@ -3,12 +3,14 @@ import BookMarked from "./bookMarked";
 
 class Filters extends Component {
   state = {};
+
   render() {
+    const { onFilterBookMark, showBookMarked } = this.props;
     return (
       <React.Fragment>
-        <div class="filterBar">
-          <div>
-            <BookMarked />
+        <div className="filterBar">
+          <div onClick={onFilterBookMark}>
+            <BookMarked showBookMarked={showBookMarked} />
           </div>
         </div>
       </React.Fragment>

@@ -3,7 +3,7 @@ const userInfoDb = [
     _id: "P1",
     name: "Sujish",
     peaceMarked: ["A1", "A3"],
-    bookMarked: ["A1", "A2"]
+    bookMarked: ["A2", "A4"]
   },
 
   {

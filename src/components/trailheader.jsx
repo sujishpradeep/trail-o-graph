@@ -4,7 +4,9 @@ const TrailHeader = ({ trailName, state, height }) => {
   return (
     <div className="trail-header">
       <div className="trail-info">
-        <h3 id="trail-name">{trailName}</h3>
+        <a href="/new">
+          <h3 id="trail-name">{trailName}</h3>
+        </a>
         <p id="trail-state">
           {state} | {height} feet
         </p>
