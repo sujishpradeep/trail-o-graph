@@ -1,15 +1,13 @@
 import React from "react";
-
-import "bootstrap/dist/css/bootstrap.css";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <div id="all">
       <ul id="navbarul">
+        <Link to="/">trailo</Link>
         <li id="navbarli" />
-        <li id="navbarli">
-          <a href="#top">TRAIL'OGRAPH</a>
-        </li>
+        <li id="navbarli" />
         <li id="navbarli" />
         <li id="navbarli" />
       </ul>

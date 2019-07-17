@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const TrailPicMain = ({ coverPhoto }) => {
+const TrailPicMain = ({ coverPhoto, trailId }) => {
   return (
-    <div className="trail-pic-main">
-      <img src={coverPhoto} alt="Trail Main" />
-    </div>
+    <Link to={`/trail/${trailId}`}>
+      <div className="trail-pic">
+        <img src={coverPhoto} alt="Trail Main" id="img-header" />
+      </div>
+    </Link>
   );
 };
 

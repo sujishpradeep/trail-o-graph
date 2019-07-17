@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
-//import { faBookmark as faBookReg } from "@fortawesome/free-regular-svg-icons";
+import { faBookmark as faBookReg } from "@fortawesome/free-regular-svg-icons";
 
 class BookMarked extends Component {
   state = {};
@@ -12,10 +12,13 @@ class BookMarked extends Component {
 
     filterbookMarkicon = "filter-bookmark " + filterbookMarkicon;
 
+    let faBookmarkIcon = this.props.showBookMarked ? faBookmark : faBookReg;
+
     return (
       <div>
         <button className={filterbookMarkicon}>
-          <FontAwesomeIcon icon={faBookmark} className="bookMarkedShadow" />
+          <FontAwesomeIcon icon={faBookmarkIcon} className="bookMarkedShadow" />
+          <b> Bookmarks</b>
         </button>
       </div>
     );

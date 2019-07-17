@@ -1,7 +1,7 @@
 :root {
-  --main-color-2: white;
+  --main-color-2: rgb(241, 240, 240);
 
-  --header-color-2: #6c445b;
+  --header-color-2: #1f1e1e;
   /*--header-color-2: rgb(248, 236, 236); #6c445b*/
 
   /* saved colors 
@@ -12,20 +12,20 @@
 
   --filter-color: #875555;
   --filter-background-color: rgb(27, 25, 25);
-  --cards-border: 1.4px;
-  --banner-text: #ac7878;
-  --banner-underline: #6c445b;
-  --banner-para: #876c55;
+  --cards-border: 5px;
+  --banner-text: #876c55;
+  --banner-underline: #2c2c2c;
+  --banner-para: #a76271;
   --filterbar-background: white;
   --trail-header-p: #1b2c1b;
   --trail-header-h3: #6c445b;
-  --trail-feed-background: rgb(246, 247, 240);
+  --trail-feed-background: #f7f2ef;
 
   --main-primary-0: rgb(253, 239, 239);
   --main-primary-1: #d6a9a9;
   --main-primary-2: #ac7878;
   --main-primary-3: #633232;
-  --main-primary-4: #551c1c;
+  --main-primary-4: #2d2d2d;
 
   --main-secondary-1-0: #876c55;
   --main-secondary-1-1: #623a19;
@@ -48,10 +48,10 @@
 
 body {
   margin: 0;
-  background-color: #f7f7e2;
+  background-color: rgb(241, 240, 240);
 }
 
-@import url(https://fonts.googleapis.com/css?family=Oswald);
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
 
 #navbarul {
   background-color: var(--header-color-2);
@@ -59,19 +59,20 @@ body {
   border-top: solid var( --main-color-2);
   border-width: 3px;*/
 
-  height: 80px;
-  word-spacing: 70px;
-  text-align: center;
-  box-shadow: 0px 0px 2px;
-  box-shadow: #f0dcdc;
+  height: 45px;
+  word-spacing: 80px;
+  text-align: left;
+  margin-bottom: 0px;
+  /* box-shadow: 0px 0px 2px;
+  box-shadow: #2c2c2c; */
 }
 
 #navbarul a {
-  font-family: Oswald;
-  font-size: 40px;
-  text-align: center;
+  font-family: "Pacifico";
+  letter-spacing: 15px;
+  font-size: 27px;
   text-decoration: none;
-  color: var(--main-color-2);
+  color: white;
   transition: ease-out 0.2s;
 }
 #navbarli {
@@ -79,7 +80,7 @@ body {
   text-decoration: none;
   transition: ease-out 0.5s;
 }
-
+/* 
 #navbarli a:hover {
   background-color: var(--main-color-2);
   color: var(--header-color-2);
@@ -92,41 +93,54 @@ body {
   box-shadow: 0px 0px 1px;
   box-shadow: var(--main-color-2);
   transition: ease-out 0.7s;
-}
+} */
 
 /*  banner */
 
 #banner {
   /*background-color: #b2bbb2;*/
-  background-image: url(snow_1.jpeg);
+  /* background-image: url(blog-nature.png);*/
   /* background-size: cover;*/
-  background-position: left;
+  /* background-position: left;
   /*background-attachment: fixed;*/
-  background-repeat: no-repeat;
-  background-size: auto;
+  /* background-repeat: no-repeat;*/
+  background-size: 100% 100%;
+  object-fit: contain;
   margin-left: 20vw;
   margin-right: 20vw;
-  border: solid 7px var(--main-primary-3);
+  width: 1100px;
+  /*border: solid 7px var(--banner-para);*/
   border-radius: 2vw;
   padding-bottom: 80px;
 }
 .bannerOuter {
   margin-top: 0px;
+  background-color: #f1ead6;
+  display: flex;
+  /*  background-color: #f4f2e5;*/
 }
 .brand-banner {
+  flex-grow: 3;
   padding: 100px 0px;
   position: top;
   align-items: top;
   text-align: center;
   margin-top: 0px;
 }
+.brand-png {
+  background-image: url(blog-nature.png);
+  background-size: 100% 100%;
+  object-fit: contain;
+  width: 1500px;
+  height: 450px;
+}
 
+@import url("https://fonts.googleapis.com/css?family=Assistant");
 .brand-banner__header {
-  font-family: FaktCondensed, AvenirNextCondensed-Medium, Segoe UI, sans-serif;
+  font-family: Assistant, sans-serif;
   font-weight: 700;
   font-size: 50px;
   line-height: 43px;
-  text-transform: uppercase;
   color: var(--banner-text);
   display: inline-block;
   text-align: center;
@@ -135,154 +149,17 @@ body {
 
 .brand-banner__header div:last-child {
   border-bottom: 5px solid var(--banner-underline);
-
   display: inline-block;
-  padding: 2px 0 2px;
+  padding: 10px 0 5px;
 }
 
+@import url("https://fonts.googleapis.com/css?family=Roboto");
+
 .brand-banner__subheader {
-  font-family: osWald;
+  font-family: roboto, sans-serif;
   font-weight: 500;
   font-size: 30px;
   color: var(--banner-para);
-}
-
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-
-html,
-body {
-  font-family: "Open Sans", sans-serif;
-}
-
-.feedBackground {
-  background-color: var(--trail-feed-background);
-  padding: 15px;
-}
-
-.trail-feed-container {
-  padding: 15px;
-}
-
-.trail-container {
-  overflow: hidden;
-  margin: 0px auto;
-  min-width: 180px;
-  max-width: 600px;
-  max-height: 1000px;
-  border-radius: 8px;
-  background: var(--main-color-2);
-  border: solid var(--main-primary-4);
-  border-width: var(--cards-border) var(--cards-border);
-}
-
-/* PROFILE SECTION */
-.trail-header {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: 2px 2px;
-  border-bottom: solid var(--main-primary-4);
-  border-bottom-width: var(--cards-border);
-}
-
-/* PROFILE INFO */
-.trail-info {
-  flex: 1 0 120px;
-  margin-left: 8px;
-  margin-top: 0px;
-}
-
-.trail-header .trail-info h3 {
-  display: block;
-  color: var(--trail-header-h3);
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-
-  font-weight: 600;
-  font-size: 28px;
-}
-
-.trail-header .trail-info p {
-  margin: 4px;
-  color: var(--trail-header-p);
-  font-size: 17px;
-  font-weight: bold;
-}
-
-.profile-picture {
-  display: flex;
-  flex: 0 0 100px;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.profile-picture img {
-  padding: 8px;
-  width: 64px;
-  height: 64px;
-  border: 1px solid var(--main-primary-4);
-  border-radius: 60px;
-  transition: all 0.3s ease-in-out;
-  transform: scale(0.95);
-}
-.profile-picture img:hover {
-  cursor: pointer;
-  transform: scale(1);
-}
-
-/* TRAIL PIC MAIN */
-.trail-pic-main {
-  position: relative;
-  /*display: flex;*/
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  max-height: 780px;
-  height: 100vw;
-}
-.trail-pic-main img {
-  position: absolute;
-  width: 100%;
-  opacity: 1;
-  transition: all 0.5s;
-}
-
-/* TRAIL STATS */
-.trail-stats {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  background: var(--main-color-2);
-  border-top: solid var(--main-primary-4);
-  border-top-width: var(--cards-border);
-  font-size: 30px;
-}
-
-#trailPostSpan {
-  flex: 1 1 100px;
-  padding: 12px;
-  height: 60px;
-  color: var(--main-primary-4);
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.3s ease-in-out;
-}
-
-#trailPostSpan:hover {
-  cursor: pointer;
-}
-
-.peaceContainer {
-  border-right: solid var(--main-primary-4);
-  border-right-width: var(--cards-border);
-}
-
-#bookmark {
-  align-content: flex-end;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
@@ -294,7 +171,7 @@ body {
   flex-direction: column;
   align-items: flex-end;
 
-  margin: 15px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   padding: 15px 0px;
   background: var(--filterbar-background);
   /* border-bottom: 2px solid #876c55;
@@ -304,7 +181,7 @@ body {
 
 .filter-bookmark {
   color: var(--main-primary-4);
-  background-color: var(--main-color-2);
+  background-color: white;
   border-radius: 4px;
   border: 1.4px solid var(--main-primary-4);
   margin-right: 35px;
@@ -317,15 +194,135 @@ body {
 }
 
 .filterbookMarkiconinactive {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .filter-bookmark:focus {
   outline: none;
 }
+.bookMarkedShadow {
+  margin-right: 3px;
+}
 
-/************* TRAIL LINK **********/
+/* TRAIL FEED */
 
-a {
-  text-decoration: none !important;
+#img-header {
+  width: 100%;
+  height: 70vw;
+  display: block;
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(241, 241, 237);
+  font-family: "Open Sans", sans-serif;
+}
+
+.trail-grid-item {
+  width: 100%;
+  height: auto;
+  border: solid 10px white;
+
+  background-color: white;
+}
+.trail-grid-item:last-child {
+  margin-bottom: 1vw;
+}
+
+.trail-pic {
+  cursor: pointer;
+}
+.trail-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+#trail-name {
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: normal;
+  line-height: 43.68px;
+  text-transform: none;
+  color: #2d2d2d;
+}
+a:hover {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#trail-state {
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: normal;
+  line-height: 19.999px;
+  text-transform: none;
+  color: #4b4c4e;
+}
+.trail-stats {
+  margin-top: 0.6vw;
+}
+
+#trailPostSpan {
+  font-size: 35px;
+  color: var(--main-primary-4);
+}
+#trailPostSpan:hover {
+  cursor: pointer;
+}
+
+/************* MEDIA **********/
+@media (min-width: 600px) {
+  .trail-grid-item {
+    width: 100%;
+  }
+  #img-header {
+    height: 40vw;
+  }
+}
+
+@media (min-width: 900px) {
+  .trail-grid-item {
+    width: 30vw;
+  }
+  #img-header {
+    height: 30vw;
+  }
+}
+@supports (display: grid) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+
+  .trail-grid-item {
+    margin: 4vw;
+    width: auto;
+  }
+  @media (min-width: 600px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .trail-grid-item {
+      margin: 2vw;
+    }
+  }
+  @media (min-width: 900px) {
+    .grid-container {
+      grid-template-columns: repeat(3, 1fr);
+      margin: 1vw;
+    }
+    .trail-grid-item {
+      margin: 1vw;
+    }
+  }
+}
+
+ul {
+  margin-block-start: 0px;
 }

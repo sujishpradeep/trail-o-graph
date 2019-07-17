@@ -1,0 +1,159 @@
+p {
+  display: block;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  margin-bottom: 0px;
+  text-decoration: none;
+}
+
+h1 {
+  display: block;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  color: #2d2d2d;
+}
+
+h3 {
+  display: block;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+h4 {
+  display: block;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.pl5 {
+  padding-left: 10px;
+}
+
+.pr5 {
+  padding-right: 10px;
+}
+
+.pt20 {
+  padding-top: 20px;
+}
+
+.pb10 {
+  padding-bottom: 10px;
+}
+
+.pb0 {
+  padding-top: 35px;
+}
+
+.pt10 {
+  padding-top: 10px;
+}
+
+.font-small {
+  font-size: 12px;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+#td-btn-span {
+  font-size: 50px;
+}
+
+.td-body {
+  background-color: rgb(241, 241, 237);
+  margin-top: 2.5vw;
+}
+.td-outer-container {
+  margin: 0 20vw;
+  color: #2d2d2d;
+}
+
+.td-cover-pic {
+  --border: 10px solid white;
+  max-width: 1000px;
+  max-height: 271px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.td-desc-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  padding-bottom: 0.5vw;
+  padding-top: 0.5vw;
+}
+
+.td-cover-desc {
+  flex-grow: 2;
+}
+.td-like-count {
+  --float: right;
+  flex-grow: 2;
+}
+
+.td-btn-like {
+  --padding-top: 20px;
+  --flex-grow: 1;
+}
+
+.td-btn-star {
+  color: rgb(250, 250, 8);
+}
+.td-middle-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border-top: solid 1px rgb(182, 177, 177);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+/* 
+@media (min-width: 600px) {
+  .grid-item {
+    width: 100%;
+  }
+  #img-header {
+    height: 40vw;
+  }
+}
+
+@media (min-width: 900px) {
+  .grid-item {
+    width: 30vw;
+  }
+} */
+@supports (display: grid) {
+  .td-outer-container {
+    margin: 0 2vw;
+  }
+  .td-cover-pic {
+    max-height: 375px;
+  }
+
+  @media (min-width: 600px) {
+    .td-outer-container {
+      margin: 0 10vw;
+    }
+  }
+  @media (min-width: 900px) {
+    .td-outer-container {
+      margin: 0 25vw;
+    }
+  }
+}

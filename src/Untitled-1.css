@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/solid.css">
+</head>
+<body>  
+  
+<section class="post-container">
+  <div class="post-header">
+    <img
+      src="https://images.unsplash.com/photo-1541675154750-0444c7d51e8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=671&q=80"
+      alt="blog post header image"
+      id="img-header"
+    />
+  </div>
+  <div class="profile-container">
+   <div class="profile-info">
+        <h3 id="profile-name">Skandagiri Hills</h3>
+        <p id="profile-desc">Karnataka | 2200 ft</p>
+      </div>
+      
+  <div class="post-stats">
+    <a href="#" class="likes-container" aria-label="Like the blog post">
+    <i class="fa fa-star-o fa-2x" aria-hidden="true"></i>
+    <span id="likes"></span>
+    </a>
+  </div>
+  </div>
+</div>
+</section>

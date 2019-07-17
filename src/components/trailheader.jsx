@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const TrailHeader = ({ trailName, state, height }) => {
+const TrailHeader = ({ trailName, state, height, trailId }) => {
   return (
     <div className="trail-header">
       <div className="trail-info">
-        <a href="/new">
+        <Link to={`/trail/${trailId}`}>
           <h3 id="trail-name">{trailName}</h3>
-        </a>
+        </Link>
         <p id="trail-state">
           {state} | {height} feet
         </p>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NavBar from "./navbar";
+
 import TrailFeed from "./trailfeed";
 import Banner from "./banner";
 import Filters from "./filters";
@@ -20,7 +20,7 @@ class MainPage extends Component {
     If input trail ID NOT present in userArray -> Add it to the user Array*/
   addOrRemoveFromArray = (userArray, trailId) => {
     if (userArray.includes(trailId)) {
-      userArray.splice(userArray.indexOf(trailId));
+      userArray.splice(userArray.indexOf(trailId), 1);
     } else {
       userArray.push(trailId);
     }
@@ -49,9 +49,11 @@ class MainPage extends Component {
   handleBookMarkClick = trailId => {
     const { userInfo } = this.state;
     let userBookMarked = userInfo.bookMarked;
+    console.log("userBookMarked before", userBookMarked, trailId);
 
     userBookMarked = this.addOrRemoveFromArray(userBookMarked, trailId);
     userInfo.bookMarked = userBookMarked;
+    console.log("userBookMarked after", userBookMarked);
 
     this.setState({ userInfo });
   };
@@ -74,7 +76,6 @@ class MainPage extends Component {
     const { trailCards, userInfo, showBookMarked } = this.state;
     return (
       <React.Fragment>
-        <NavBar />
         <Banner />
         <Filters
           onFilterBookMark={this.handleFilterBookMark}

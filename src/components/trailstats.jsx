@@ -1,24 +1,22 @@
 import React from "react";
-
-import Peace from "../common/peace";
+import { Link } from "react-router-dom";
 import Bookmark from "../common/bookmark";
 
 const TrailStats = ({
-  peaceCount,
+  trailName,
+  state,
   trailId,
-  peaceMarked,
   bookMarked,
-  onPeaceClick,
   onBookMarkClick
 }) => {
   return (
-    <div className="trail-stats">
-      <Peace
-        peaceCount={peaceCount}
-        trailId={trailId}
-        peaceMarked={peaceMarked}
-        onPeaceClick={onPeaceClick}
-      />
+    <div className="trail-footer">
+      <div className="trail-info">
+        <Link to={`/trail/${trailId}`} style={{ textDecoration: "none" }}>
+          <h3 id="trail-name">{trailName}</h3>
+        </Link>
+        <p id="trail-state">{state}</p>
+      </div>
       <Bookmark
         bookMarked={bookMarked}
         trailId={trailId}
@@ -29,3 +27,18 @@ const TrailStats = ({
 };
 
 export default TrailStats;
+/*
+<div className="trail-stats">
+  <Peace
+    peaceCount={peaceCount}
+    trailId={trailId}
+    peaceMarked={peaceMarked}
+    onPeaceClick={onPeaceClick}
+  />
+  <Bookmark
+    bookMarked={bookMarked}
+    trailId={trailId}
+    onBookMarkClick={onBookMarkClick}
+  />
+</div>;
+*/
