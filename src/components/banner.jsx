@@ -11,6 +11,9 @@ const Banner = () => {
           <b className="brand-banner__subheader">
             Discovering the mountains of India
           </b>
+          <div class="explore-container">
+            <button class="btn-exp">Sign up</button>
+          </div>
         </header>
       </section>
       <div className="brand-png " />

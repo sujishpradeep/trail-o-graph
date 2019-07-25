@@ -41,4 +41,9 @@ export default TrailStats;
     onBookMarkClick={onBookMarkClick}
   />
 </div>;
+  <Bookmark
+        bookMarked={bookMarked}
+        trailId={trailId}
+        onBookMarkClick={onBookMarkClick}
+      />
 */

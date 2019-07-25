@@ -66,8 +66,7 @@ export function saveTrails(trailCard) {
 
 export function updatePeace(id, counter) {
   const index = trailCards.findIndex(t => t._id === id);
-
-  trailCards[index].peaceMakers += counter;
+  trailCards[index].peaceCount += counter;
 
   return trailCards[index];
 }

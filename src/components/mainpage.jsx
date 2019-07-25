@@ -27,33 +27,13 @@ class MainPage extends Component {
     return userArray;
   };
 
-  // update peaceCount of trailCard and peaceMarked array of userInfo on peaceClick
-  handlePeaceClick = trailId => {
-    const { trailCards, userInfo } = this.state;
-
-    let userPeaceMarked = userInfo.peaceMarked;
-
-    //onPeaceClick -> add 1 to peaceCount of the trail, if user has not peaceMarked in original State,
-    //                reduce 1 from peaceCount if user has already peaceMarked in original State
-    const counter = userPeaceMarked.includes(trailId) ? -1 : 1;
-    const index = trailCards.findIndex(t => t._id === trailId);
-    trailCards[index].peaceCount += counter;
-
-    userPeaceMarked = this.addOrRemoveFromArray(userPeaceMarked, trailId);
-    userInfo.peaceMarked = userPeaceMarked;
-
-    this.setState({ trailCards, userInfo });
-  };
-
   // update bookMarked array of userInfo on bookMarkClick
   handleBookMarkClick = trailId => {
     const { userInfo } = this.state;
     let userBookMarked = userInfo.bookMarked;
-    console.log("userBookMarked before", userBookMarked, trailId);
 
     userBookMarked = this.addOrRemoveFromArray(userBookMarked, trailId);
     userInfo.bookMarked = userBookMarked;
-    console.log("userBookMarked after", userBookMarked);
 
     this.setState({ userInfo });
   };
@@ -84,7 +64,6 @@ class MainPage extends Component {
         <TrailFeed
           trailCards={trailCards}
           userInfo={userInfo}
-          onPeaceClick={this.handlePeaceClick}
           onBookMarkClick={this.handleBookMarkClick}
         />
       </React.Fragment>

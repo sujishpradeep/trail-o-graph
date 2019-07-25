@@ -1,14 +1,26 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandPeace } from "@fortawesome/free-solid-svg-icons";
-import { faHandPeace as faPeaceReg } from "@fortawesome/free-regular-svg-icons";
 
-const Peace = ({ peaceCount, peaceMarked, onPeaceClick, trailId }) => {
-  const peaceIcon = peaceMarked ? faHandPeace : faPeaceReg;
+const Peace = ({ peaceMarked, onPeaceClick, trailId }) => {
+  const active = peaceMarked ? "awesomeActive" : "awesomeInActive";
 
   return (
     <React.Fragment>
-      <span
+      <div className="td-btn-like ">
+        <i
+          className={"fa fa-hand-peace-o fa-3x " + active}
+          aria-hidden="true"
+          onClick={() => onPeaceClick(trailId)}
+        />
+      </div>
+    </React.Fragment>
+  );
+};
+
+export default Peace;
+
+/*
+  const peaceIcon = peaceMarked ? faHandPeace : faPeaceReg;
+<span
         id="trailPostSpan"
         className="peaceContainer"
         onClick={() => onPeaceClick(trailId)}
@@ -16,8 +28,5 @@ const Peace = ({ peaceCount, peaceMarked, onPeaceClick, trailId }) => {
         <FontAwesomeIcon icon={peaceIcon} />
         <span id="peace">{peaceCount}</span>
       </span>
-    </React.Fragment>
-  );
-};
-
-export default Peace;
+      style={{ color: color }}
+      */
