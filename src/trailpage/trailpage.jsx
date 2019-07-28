@@ -1,62 +1,45 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "../td.css";
 import Review from "./review";
 import Peace from "../common/peace";
-import http from "../services/httpservice";
-import { apiTrails, apiUsers, apiReviews } from "../config.json";
+import { addOrRemoveFromArray } from "../generic/arrays";
+import { getTrail, updateTrailPeace } from "../services/trailService";
+import { getUser, updateUserPeace } from "../services/userService";
+import { getReviewsByTrail } from "../services/reviewService";
+import "../td.css";
 
 class TrailPage extends Component {
   state = { trailInfo: {}, userInfo: {}, trailReviews: [] };
 
   async componentDidMount() {
-    const { data: trailInfo } = await http.get(
-      apiTrails + "/" + this.props.match.params.id
-    );
-    const { data: userInfo } = await http.get(`${apiUsers}/P1`);
-
-    const { data: trailReviews } = await http.get(
-      apiReviews + "/trails/" + trailInfo._id
-    );
+    const { data: trailInfo } = await getTrail(this.props.match.params.id);
+    const { data: userInfo } = await getUser("P1");
+    const { data: trailReviews } = await getReviewsByTrail(trailInfo._id);
     this.setState({ userInfo, trailInfo, trailReviews });
     window.scrollTo(0, 0);
   }
 
-  /*If input trail ID  IS present in userArray -> remove it from the user Array
-    If input trail ID NOT present in userArray -> Add it to the user Array*/
-  addOrRemoveFromArray = (userArray, trailId) => {
-    if (userArray.includes(trailId)) {
-      userArray.splice(userArray.indexOf(trailId), 1);
-    } else {
-      userArray.push(trailId);
-    }
-    return userArray;
-  };
-
-  // update peaceCount of trailCard and peaceMarked array of userInfo on peaceClick
   handlePeaceClick = async trailId => {
     const { trailInfo, userInfo } = this.state;
-
     let userPeaceMarked = userInfo.peaceMarked;
 
     //onPeaceClick -> add 1 to peaceCount of the trail, if user has not peaceMarked in original State,
     //                reduce 1 from peaceCount if user has already peaceMarked in original State
     const counter = userPeaceMarked.includes(trailId) ? -1 : 1;
-
     trailInfo.peaceCount += counter;
-    const peaceMarked = this.addOrRemoveFromArray(userPeaceMarked, trailId);
+
+    const peaceMarked = addOrRemoveFromArray(userPeaceMarked, trailId);
     userInfo.peaceMarked = peaceMarked;
     this.setState({ trailInfo, userInfo });
 
-    await http.put(apiTrails + "/peace/" + trailInfo._id, {
-      counter: counter
-    });
-    await http.put(apiUsers + "/peace/" + userInfo._id, peaceMarked);
+    await updateTrailPeace(trailInfo._id, counter);
+    await updateUserPeace(userInfo._id, peaceMarked);
   };
 
   render() {
     const { trailInfo, userInfo, trailReviews } = this.state;
     const { _id, name, peaceCount, height } = trailInfo;
+
     const peaceMarked =
       Object.keys(userInfo).length === 0
         ? false

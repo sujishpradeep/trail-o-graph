@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import UserReview from "./userreview";
-import http from "../services/httpservice";
-import config from "../config.json";
-import "../ud.css";
 import { getUser } from "../services/userService";
-import { getReviewsByUser } from "../services/reviewService";
+import { getReviewsByUser, deleteReview } from "../services/reviewService";
+import "../ud.css";
 
 class UserPage extends Component {
   state = { userInfo: {}, userReviews: [] };
@@ -22,7 +20,7 @@ class UserPage extends Component {
     const userReviews = this.state.userReviews.filter(r => r._id !== reviewId);
     this.setState({ userReviews });
     try {
-      await http.delete(config.apiReviews + "/" + reviewId);
+      await deleteReview(reviewId);
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         alert("post already deleted");

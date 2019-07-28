@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import TrailFeed from "./trailfeed";
 import Banner from "./banner";
 import Filters from "./filters";
-import http from "../services/httpservice";
-import { apiTrails, apiUsers } from "../config.json";
+import { getTrails, postTrails } from "../services/trailService";
+import { getUser, updateUserBookMarked } from "../services/userService";
+import { addOrRemoveFromArray } from "../generic/arrays";
 
 class MainPage extends Component {
   state = { trailCards: [], userInfo: {} };
 
   async componentDidMount() {
-    const { data: trailCards } = await http.get(apiTrails);
-    const { data: userInfo } = await http.get(`${apiUsers}/P1`);
+    const { data: trailCards } = await getTrails();
+    const { data: userInfo } = await getUser("P1");
     const showBookMarked = false;
     this.setState({ trailCards, userInfo, showBookMarked });
   }
@@ -28,32 +29,22 @@ class MainPage extends Component {
     };
     const trailCards = [trailCard, ...this.state.trailCards];
     this.setState({ trailCards });
-    await http.post(apiTrails, trailCard);
+    await postTrails(trailCard);
   };
 
   handleBookMarkClick = async trailId => {
     const { userInfo } = this.state;
     let userBookMarked = userInfo.bookMarked;
-    userBookMarked = this.addOrRemoveFromArray(userBookMarked, trailId);
+    userBookMarked = addOrRemoveFromArray(userBookMarked, trailId);
     userInfo.bookMarked = userBookMarked;
     this.setState({ userInfo });
-    const bookMarked = userInfo.bookMarked;
-    await http.put(`${apiUsers}/${userInfo._id}`, bookMarked);
-  };
-
-  addOrRemoveFromArray = (arrayIn, inputId) => {
-    if (arrayIn.includes(inputId)) {
-      arrayIn.splice(arrayIn.indexOf(inputId), 1);
-    } else {
-      arrayIn.push(inputId);
-    }
-    return arrayIn;
+    await updateUserBookMarked(userInfo._id, userInfo.bookMarked);
   };
 
   handleFilterBookMark = async () => {
     let { showBookMarked, trailCards, userInfo } = this.state;
     showBookMarked = !showBookMarked;
-    const { data: originalTrailCards } = await http.get(apiTrails);
+    const { data: originalTrailCards } = await getTrails();
     trailCards = showBookMarked
       ? (trailCards = trailCards.filter(t =>
           userInfo.bookMarked.includes(t._id)
