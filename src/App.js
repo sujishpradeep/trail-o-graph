@@ -5,6 +5,7 @@ import Footer from "./components/footer";
 import NavBar from "./components/navbar";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import UserPage from "./userPage/userpage";
+
 function App() {
   return (
     <Router>

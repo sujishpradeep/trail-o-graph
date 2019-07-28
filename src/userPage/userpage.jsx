@@ -1,26 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
-import { getUserInfoById } from "../services/testUserInfoDb";
-import "../ud.css";
 import UserReview from "./userreview";
-import { getReviewByUser } from "../services/testReviewDb";
+import http from "../services/httpservice";
+import config from "../config.json";
+import "../ud.css";
+import { getUser } from "../services/userService";
+import { getReviewsByUser } from "../services/reviewService";
 
 class UserPage extends Component {
-  state = { userInfo: {} };
+  state = { userInfo: {}, userReviews: [] };
 
-  componentDidMount() {
-    const userInfo = getUserInfoById(this.props.match.params.id);
-    console.log("userInfo ", userInfo);
-    this.setState({ userInfo });
+  async componentDidMount() {
+    const { data: userInfo } = await getUser(this.props.match.params.id);
+    const { data: userReviews } = await getReviewsByUser(userInfo._id);
+    this.setState({ userInfo, userReviews });
     window.scrollTo(0, 0);
   }
 
+  handleReviewDelete = async reviewId => {
+    const originalUserReviews = this.state.userReviews;
+    const userReviews = this.state.userReviews.filter(r => r._id !== reviewId);
+    this.setState({ userReviews });
+    try {
+      await http.delete(config.apiReviews + "/" + reviewId);
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        alert("post already deleted");
+      }
+      this.setState({ userReviews: originalUserReviews });
+    }
+  };
+
   render() {
-    const { userInfo } = this.state;
+    let { userInfo, userReviews } = this.state;
     const { _id, name, place, bio } = userInfo;
-    const userReviews = getReviewByUser(_id);
-    console.log("userReview 2", userReviews);
 
     return (
       <div className="ud-body">
@@ -51,7 +64,11 @@ class UserPage extends Component {
           <h2> Trail stories</h2>
         </div>
         {userReviews.map(userReview => (
-          <UserReview key={userReview._id} userReview={userReview} />
+          <UserReview
+            key={userReview._id}
+            userReview={userReview}
+            onReviewDelete={this.handleReviewDelete}
+          />
         ))}
       </div>
     );

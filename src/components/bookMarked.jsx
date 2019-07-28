@@ -17,7 +17,6 @@ class BookMarked extends Component {
     return (
       <div>
         <button className={filterbookMarkicon}>
-          <b> Starred</b>
           <FontAwesomeIcon icon={faBookmarkIcon} className="bookMarkedShadow" />
         </button>
       </div>

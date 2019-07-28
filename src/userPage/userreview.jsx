@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const UserReview = ({ userReview }) => {
+const UserReview = ({ userReview, onReviewDelete }) => {
   return (
     <div className="ud-outer-container">
       <div className="ud-review-container  ">
@@ -56,6 +56,7 @@ const UserReview = ({ userReview }) => {
           />
         </div>
       </div>
+      <button onClick={() => onReviewDelete(userReview._id)}>Delete</button>
     </div>
   );
 };

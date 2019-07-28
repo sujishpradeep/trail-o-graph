@@ -137,26 +137,6 @@ h4 {
   padding-bottom: 5px;
 }
 
-@supports (display: grid) {
-  .ud-outer-container {
-    margin: 0 2vw;
-  }
-  .ud-cover-pic {
-    max-height: 375px;
-  }
-
-  @media (min-width: 600px) {
-    .ud-outer-container {
-      margin: 0 10vw;
-    }
-  }
-  @media (min-width: 900px) {
-    .ud-outer-container {
-      margin: 0 25vw;
-    }
-  }
-}
-
 .ud-review-header {
   display: flex;
   flex-wrap: wrap;
@@ -240,4 +220,24 @@ h4 {
   margin: 0 25vw;
   padding-bottom: 10px;
   font-size: 18px;
+}
+
+@supports (display: grid) {
+  .ud-outer-container {
+    margin: 0 2vw;
+  }
+  .ud-cover-pic {
+    max-height: 375px;
+  }
+
+  @media (min-width: 600px) {
+    .ud-outer-container {
+      margin: 0 10vw;
+    }
+  }
+  @media (min-width: 900px) {
+    .ud-outer-container {
+      margin: 0 25vw;
+    }
+  }
 }

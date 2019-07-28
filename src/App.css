@@ -38,13 +38,17 @@ body {
 
 @import url("https://fonts.googleapis.com/css?family=Pacifico");
 
-#navbarul {
+#navbar {
+  display: flex;
   background-color: #2d2d2d;
-  /* border-bottom: solid 2px var(--pt-grey);*/
+  color: white;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center;
+}
 
-  /*border-top: solid var( --main-color-2);
-  border-width: 3px;*/
-
+#nav-trailo {
   height: 45px;
   word-spacing: 80px;
   text-align: left;
@@ -52,35 +56,34 @@ body {
 
   /* box-shadow: 0px 0px 2px;
   box-shadow: #2c2c2c; */
+  /* border-bottom: solid 2px var(--pt-grey);*/
+  /*border-top: solid var( --main-color-2);
+  border-width: 3px;*/
 }
 
-#navbarul a {
+#nav-trailo a {
+  text-decoration: none;
+  color: white;
   font-family: "Pacifico";
   letter-spacing: 10px;
   font-size: 27px;
+}
+
+#nav-user {
+  display: flex;
+  padding-left: 10px;
+}
+
+#nav-login a {
   text-decoration: none;
   color: white;
-  transition: ease-out 0.2s;
 }
-#navbarli {
-  display: inline-block;
+
+#nav-signup a {
+  padding-left: 10px;
   text-decoration: none;
-  transition: ease-out 0.5s;
+  color: white;
 }
-/* 
-#navbarli a:hover {
-  background-color: var(--main-color-2);
-  color: var(--pt-black);
-  padding-top: 0px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  border-top: solid var(--pt-black);
-  border-radius: 8px;
-  box-shadow: 0px 0px 1px;
-  box-shadow: var(--main-color-2);
-  transition: ease-out 0.7s;
-} */
 
 /*  banner */
 
@@ -180,7 +183,6 @@ body {
   cursor: pointer;
   height: 25px;
   font-size: 14px;
-
   letter-spacing: 0.9px;
 }
 
@@ -194,9 +196,6 @@ body {
 
 .filter-bookmark:focus {
   outline: none;
-}
-.bookMarkedShadow {
-  margin-left: 3px;
 }
 
 /* TRAIL FEED */

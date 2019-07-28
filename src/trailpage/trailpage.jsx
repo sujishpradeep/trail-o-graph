@@ -1,20 +1,24 @@
 import React, { Component } from "react";
-import { getTrailById, updatePeace } from "../services/testTrailCards.js";
-import { getUserInfoById } from "../services/testUserInfoDb";
-import { getReviewByTrail } from "../services/testReviewDb";
 import { Link } from "react-router-dom";
 import "../td.css";
-
 import Review from "./review";
 import Peace from "../common/peace";
+import http from "../services/httpservice";
+import { apiTrails, apiUsers, apiReviews } from "../config.json";
 
 class TrailPage extends Component {
-  state = { trailInfo: {}, userInfo: {} };
+  state = { trailInfo: {}, userInfo: {}, trailReviews: [] };
 
-  componentDidMount() {
-    const trailInfo = getTrailById(this.props.match.params.id);
-    const userInfo = getUserInfoById("P1");
-    this.setState({ userInfo, trailInfo });
+  async componentDidMount() {
+    const { data: trailInfo } = await http.get(
+      apiTrails + "/" + this.props.match.params.id
+    );
+    const { data: userInfo } = await http.get(`${apiUsers}/P1`);
+
+    const { data: trailReviews } = await http.get(
+      apiReviews + "/trails/" + trailInfo._id
+    );
+    this.setState({ userInfo, trailInfo, trailReviews });
     window.scrollTo(0, 0);
   }
 
@@ -30,7 +34,7 @@ class TrailPage extends Component {
   };
 
   // update peaceCount of trailCard and peaceMarked array of userInfo on peaceClick
-  handlePeaceClick = trailId => {
+  handlePeaceClick = async trailId => {
     const { trailInfo, userInfo } = this.state;
 
     let userPeaceMarked = userInfo.peaceMarked;
@@ -39,25 +43,25 @@ class TrailPage extends Component {
     //                reduce 1 from peaceCount if user has already peaceMarked in original State
     const counter = userPeaceMarked.includes(trailId) ? -1 : 1;
 
-    updatePeace(trailId, counter);
-
-    userPeaceMarked = this.addOrRemoveFromArray(userPeaceMarked, trailId);
-    userInfo.peaceMarked = userPeaceMarked;
-
+    trailInfo.peaceCount += counter;
+    const peaceMarked = this.addOrRemoveFromArray(userPeaceMarked, trailId);
+    userInfo.peaceMarked = peaceMarked;
     this.setState({ trailInfo, userInfo });
+
+    await http.put(apiTrails + "/peace/" + trailInfo._id, {
+      counter: counter
+    });
+    await http.put(apiUsers + "/peace/" + userInfo._id, peaceMarked);
   };
 
   render() {
-    const { trailInfo, userInfo } = this.state;
-    const { _id, name, peaceCount } = trailInfo;
+    const { trailInfo, userInfo, trailReviews } = this.state;
+    const { _id, name, peaceCount, height } = trailInfo;
     const peaceMarked =
       Object.keys(userInfo).length === 0
         ? false
         : userInfo.peaceMarked.includes(_id);
-    console.log("_id ", _id);
-    const trailReviews = getReviewByTrail(_id);
-    console.log("trailReviews ", trailReviews);
-    //const peaceMarked = userInfo.peaceMarked.includes(trailInfo._id);
+
     return (
       <div className="td-body">
         <div className="td-outer-container">
@@ -71,7 +75,7 @@ class TrailPage extends Component {
 
           <div className="td-cover-pic">
             <img
-              src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
+              src="https://images.unsplash.com/photo-1495555694070-b0fe5bcd2576?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
               alt="blog post header "
               id="td-cover-img"
             />
@@ -90,7 +94,7 @@ class TrailPage extends Component {
               <p className="font-small">said it's an awesome place</p>
             </div>
             <div className="td-height">
-              <h2>2150 feet</h2>
+              <h2>{height} feet</h2>
             </div>
           </div>
 
