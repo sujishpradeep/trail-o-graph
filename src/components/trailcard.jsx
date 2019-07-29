@@ -2,8 +2,8 @@ import React from "react";
 import TrailPicMain from "./trailpicmain";
 import TrailStats from "./trailstats";
 
-const TrailCard = ({ trailCard, userInfo, onBookMarkClick }) => {
-  const bookMarked = userInfo.bookMarked.includes(trailCard._id);
+const TrailCard = ({ trailCard, profileInfo, onBookMarkClick }) => {
+  const bookMarked = profileInfo.bookMarked.includes(trailCard._id);
 
   return (
     <div>

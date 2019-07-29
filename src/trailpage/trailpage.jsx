@@ -1,49 +1,49 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Review from "./review";
+import TrailReview from "./trailreview";
 import Peace from "../common/peace";
 import { addOrRemoveFromArray } from "../generic/arrays";
 import { getTrail, updateTrailPeace } from "../services/trailService";
-import { getUser, updateUserPeace } from "../services/userService";
+import { getProfile, updateProfilePeace } from "../services/profileService";
 import { getReviewsByTrail } from "../services/reviewService";
 import "../td.css";
 
 class TrailPage extends Component {
-  state = { trailInfo: {}, userInfo: {}, trailReviews: [] };
+  state = { trailInfo: {}, profileInfo: {}, trailReviews: [] };
 
   async componentDidMount() {
     const { data: trailInfo } = await getTrail(this.props.match.params.id);
-    const { data: userInfo } = await getUser("P1");
+    const { data: profileInfo } = await getProfile("P1");
     const { data: trailReviews } = await getReviewsByTrail(trailInfo._id);
-    this.setState({ userInfo, trailInfo, trailReviews });
+    this.setState({ profileInfo, trailInfo, trailReviews });
     window.scrollTo(0, 0);
   }
 
   handlePeaceClick = async trailId => {
-    const { trailInfo, userInfo } = this.state;
-    let userPeaceMarked = userInfo.peaceMarked;
+    const { trailInfo, profileInfo } = this.state;
+    let profilePeaceMarked = profileInfo.peaceMarked;
 
-    //onPeaceClick -> add 1 to peaceCount of the trail, if user has not peaceMarked in original State,
-    //                reduce 1 from peaceCount if user has already peaceMarked in original State
-    const counter = userPeaceMarked.includes(trailId) ? -1 : 1;
+    //onPeaceClick -> add 1 to peaceCount of the trail, if profile has not peaceMarked in original State,
+    //                reduce 1 from peaceCount if profile has already peaceMarked in original State
+    const counter = profilePeaceMarked.includes(trailId) ? -1 : 1;
     trailInfo.peaceCount += counter;
 
-    const peaceMarked = addOrRemoveFromArray(userPeaceMarked, trailId);
-    userInfo.peaceMarked = peaceMarked;
-    this.setState({ trailInfo, userInfo });
+    const peaceMarked = addOrRemoveFromArray(profilePeaceMarked, trailId);
+    profileInfo.peaceMarked = peaceMarked;
+    this.setState({ trailInfo, profileInfo });
 
     await updateTrailPeace(trailInfo._id, counter);
-    await updateUserPeace(userInfo._id, peaceMarked);
+    await updateProfilePeace(profileInfo._id, peaceMarked);
   };
 
   render() {
-    const { trailInfo, userInfo, trailReviews } = this.state;
+    const { trailInfo, profileInfo, trailReviews } = this.state;
     const { _id, name, peaceCount, height } = trailInfo;
 
     const peaceMarked =
-      Object.keys(userInfo).length === 0
+      Object.keys(profileInfo).length === 0
         ? false
-        : userInfo.peaceMarked.includes(_id);
+        : profileInfo.peaceMarked.includes(_id);
 
     return (
       <div className="td-body">
@@ -118,7 +118,7 @@ class TrailPage extends Component {
             <h3 id="td-exp">Trail stories</h3>
           </div>
           {trailReviews.map(reviewInfo => (
-            <Review key={reviewInfo._id} reviewInfo={reviewInfo} />
+            <TrailReview key={reviewInfo._id} reviewInfo={reviewInfo} />
           ))}
         </div>
       </div>

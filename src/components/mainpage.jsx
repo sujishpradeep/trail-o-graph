@@ -3,17 +3,20 @@ import TrailFeed from "./trailfeed";
 import Banner from "./banner";
 import Filters from "./filters";
 import { getTrails, postTrails } from "../services/trailService";
-import { getUser, updateUserBookMarked } from "../services/userService";
+import {
+  getProfile,
+  updateProfileBookMarked
+} from "../services/profileService";
 import { addOrRemoveFromArray } from "../generic/arrays";
 
 class MainPage extends Component {
-  state = { trailCards: [], userInfo: {} };
+  state = { trailCards: [], profileInfo: {} };
 
   async componentDidMount() {
     const { data: trailCards } = await getTrails();
-    const { data: userInfo } = await getUser("P1");
+    const { data: profileInfo } = await getProfile("P1");
     const showBookMarked = false;
-    this.setState({ trailCards, userInfo, showBookMarked });
+    this.setState({ trailCards, profileInfo, showBookMarked });
   }
 
   handleAddTrail = async () => {
@@ -33,28 +36,28 @@ class MainPage extends Component {
   };
 
   handleBookMarkClick = async trailId => {
-    const { userInfo } = this.state;
-    let userBookMarked = userInfo.bookMarked;
-    userBookMarked = addOrRemoveFromArray(userBookMarked, trailId);
-    userInfo.bookMarked = userBookMarked;
-    this.setState({ userInfo });
-    await updateUserBookMarked(userInfo._id, userInfo.bookMarked);
+    const { profileInfo } = this.state;
+    let profileBookMarked = profileInfo.bookMarked;
+    profileBookMarked = addOrRemoveFromArray(profileBookMarked, trailId);
+    profileInfo.bookMarked = profileBookMarked;
+    this.setState({ profileInfo });
+    await updateProfileBookMarked(profileInfo._id, profileInfo.bookMarked);
   };
 
   handleFilterBookMark = async () => {
-    let { showBookMarked, trailCards, userInfo } = this.state;
+    let { showBookMarked, trailCards, profileInfo } = this.state;
     showBookMarked = !showBookMarked;
     const { data: originalTrailCards } = await getTrails();
     trailCards = showBookMarked
       ? (trailCards = trailCards.filter(t =>
-          userInfo.bookMarked.includes(t._id)
+          profileInfo.bookMarked.includes(t._id)
         ))
       : originalTrailCards;
     this.setState({ showBookMarked, trailCards });
   };
 
   render() {
-    const { trailCards, userInfo, showBookMarked } = this.state;
+    const { trailCards, profileInfo, showBookMarked } = this.state;
 
     return (
       <React.Fragment>
@@ -65,7 +68,7 @@ class MainPage extends Component {
         />
         <TrailFeed
           trailCards={trailCards}
-          userInfo={userInfo}
+          profileInfo={profileInfo}
           onBookMarkClick={this.handleBookMarkClick}
         />
         <button onClick={this.handleAddTrail}>add</button>

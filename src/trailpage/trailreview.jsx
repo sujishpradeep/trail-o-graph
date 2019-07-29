@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Review = ({ reviewInfo }) => {
+const TrailReview = ({ reviewInfo }) => {
   return (
     <div className="td-review-container  ">
       <div className="td-review-header  ">
         <Link
-          to={`/user/${reviewInfo.user_id}`}
+          to={`/profile/${reviewInfo.user_id}`}
           style={{ textDecoration: "none" }}
         >
           <div className="td-profile-pic ">
@@ -20,7 +20,7 @@ const Review = ({ reviewInfo }) => {
 
         <div className="td-profile-name">
           <Link
-            to={`/user/${reviewInfo.user_id}`}
+            to={`/profile/${reviewInfo.user_id}`}
             style={{ textDecoration: "none" }}
           >
             <h2 id="profile-name">{reviewInfo.user_name}</h2>
@@ -57,4 +57,4 @@ const Review = ({ reviewInfo }) => {
   );
 };
 
-export default Review;
+export default TrailReview;

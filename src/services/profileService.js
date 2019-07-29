@@ -1,14 +1,14 @@
-import http from "../services/httpservice";
+import http from "./httpservice";
 import { apiUsers } from "../config.json";
 
-export function getUser(id) {
+export function getProfile(id) {
   return http.get(apiUsers + "/" + id);
 }
 
-export function updateUserBookMarked(id, bookMarked) {
+export function updateProfileBookMarked(id, bookMarked) {
   http.put(`${apiUsers}/${id}`, bookMarked);
 }
 
-export function updateUserPeace(id, peaceMarked) {
+export function updateProfilePeace(id, peaceMarked) {
   http.put(apiUsers + "/peace/" + id, peaceMarked);
 }

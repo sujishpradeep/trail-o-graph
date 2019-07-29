@@ -92,25 +92,25 @@ h4 {
   padding-bottom: 20px;
 }
 
-.ud-body {
+.pd-body {
   background-color: var(--bk-grey);
   margin: 0;
   margin-top: 2.5vw;
 }
 
-.ud-outer-container {
+.pd-outer-container {
   margin: 0 20vw;
   color: var(--pt-black);
   letter-spacing: 0.5px;
 }
 
-.ud-height {
+.pd-height {
   font-size: 15px;
   padding-top: 7px;
   letter-spacing: normal;
 }
 
-.ud-review-container {
+.pd-review-container {
   background-color: white;
   border-radius: 6px;
   margin-bottom: 2px;
@@ -118,17 +118,17 @@ h4 {
 
 @import url("https://fonts.googleapis.com/css?family=Pacifico");
 
-#ud-review-photos {
+#pd-review-photos {
   padding-left: 5px;
 }
-#ud-rev-pic {
+#pd-rev-pic {
   width: 75px;
   height: 75px;
   flex-grow: 1;
   margin: 5px 0px 5px 5px;
 }
 
-.ud-review-content {
+.pd-review-content {
   padding-top: 2px;
   padding-left: 10px;
   padding-right: 5px;
@@ -137,7 +137,7 @@ h4 {
   padding-bottom: 5px;
 }
 
-.ud-review-header {
+.pd-review-header {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -150,26 +150,26 @@ h4 {
   --background-color: var(--sp-grey);
 }
 
-#ud-trail-pic {
+#pd-trail-pic {
   width: 33px;
   height: 33px;
   border-radius: 3px;
 }
 
-.ud-trail-name {
+.pd-trail-name {
   flex-grow: 2;
   margin-left: 5px;
   font-size: 12px;
   letter-spacing: 1px;
 }
 
-#ud-trail-height {
+#pd-trail-height {
   font-size: 12px;
-  letter-spacing: 1px;
+  letter-spacing: 0.4px;
   padding-top: 12px;
 }
 
-#ud-profile-container {
+#pd-profile-container {
   margin: 0 10vw;
   color: var(--pt-black);
   letter-spacing: 0.5px;
@@ -177,7 +177,7 @@ h4 {
   border-radius: 5px;
 }
 
-#ud-profile-header {
+#pd-profile-header {
   display: flex;
   padding: 20px;
   justify-content: center;
@@ -185,7 +185,7 @@ h4 {
   margin-bottom: 30px;
 }
 
-#ud-user-profile-pic {
+#pd-profile-pic {
   padding: 3px;
   width: 80px;
   height: 80px;
@@ -194,22 +194,22 @@ h4 {
   flex-grow: 1;
 }
 
-#ud-profile-desc {
+#pd-profile-desc {
   margin-left: 10px;
 }
 
-#ud-profile-name {
+#pd-profile-name {
   font-size: 30px;
   color: var(--pt-black);
 }
 
-#ud-profile-location {
+#pd-profile-location {
   font-size: 15px;
   padding-top: 2px;
   color: rgb(133, 132, 132);
 }
 
-#ud-profile-bio {
+#pd-profile-bio {
   font-size: 15px;
   padding-top: 5px;
   color: #2d2d2d;
@@ -223,20 +223,20 @@ h4 {
 }
 
 @supports (display: grid) {
-  .ud-outer-container {
+  .pd-outer-container {
     margin: 0 2vw;
   }
-  .ud-cover-pic {
+  .pd-cover-pic {
     max-height: 375px;
   }
 
   @media (min-width: 600px) {
-    .ud-outer-container {
+    .pd-outer-container {
       margin: 0 10vw;
     }
   }
   @media (min-width: 900px) {
-    .ud-outer-container {
+    .pd-outer-container {
       margin: 0 25vw;
     }
   }

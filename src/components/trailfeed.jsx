@@ -8,7 +8,7 @@ class TrailFeed extends Component {
   state = {};
 
   render() {
-    const { trailCards, userInfo, onBookMarkClick } = this.props;
+    const { trailCards, profileInfo, onBookMarkClick } = this.props;
 
     return (
       <div className="grid-container">
@@ -16,7 +16,7 @@ class TrailFeed extends Component {
           <TrailCard
             key={trailCard._id}
             trailCard={trailCard}
-            userInfo={userInfo}
+            profileInfo={profileInfo}
             onBookMarkClick={onBookMarkClick}
           />
         ))}
