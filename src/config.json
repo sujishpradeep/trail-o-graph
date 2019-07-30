@@ -1,5 +1,7 @@
 {
   "apiReviews": "http://localhost:3000/api/reviews",
-  "apiUsers": "http://localhost:3000/api/profile",
-  "apiTrails": "http://localhost:3000/api/trailinfo"
+  "apiProfiles": "http://localhost:3000/api/profile",
+  "apiTrails": "http://localhost:3000/api/trailinfo",
+  "apiUsers": "http://localhost:3000/api/users",
+  "apiAuth": "http://localhost:3000/api/auth"
 }

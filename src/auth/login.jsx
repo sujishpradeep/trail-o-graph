@@ -1,22 +1,59 @@
 import React from "react";
 import "../login.css";
+import auth from "../services/authservice";
+import Form from "../common/forms";
+const Joi = require("joi");
 
-const Logout = () => {
-  return (
-    <div>
-      <form class="login">
-        <h2>Login</h2>
-        <p>Please log in</p>
-        <input type="text" placeholder="User Name" />
-        <input type="password" placeholder="Password" />
-        <input type="submit" value="Log In" />
-        <div class="links">
-          <a href="#">Forgot password</a>
-          <a href="#">Register</a>
-        </div>
-      </form>
-    </div>
-  );
-};
+class Login extends Form {
+  state = { data: { username: "", password: "" }, errors: {} };
 
-export default Logout;
+  doSubmit = async () => {
+    const { error } = this.validateUser();
+    if (error) {
+      const errors = {};
+      for (let item of error.details) errors[item.path[0]] = item.message;
+      this.setState({ errors: errors });
+      return;
+    }
+
+    try {
+      await auth.login(this.state.data);
+      window.location = "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.username = ex.response.data;
+        this.setState({ errors });
+      }
+    }
+  };
+
+  validateUser = () => {
+    const user = this.state.data;
+    const schema = {
+      username: Joi.string()
+        .required()
+        .min(3),
+      password: Joi.string()
+        .min(3)
+        .required(),
+      isAdmin: Joi.optional()
+    };
+    const options = { abortEarly: false };
+    return Joi.validate(user, schema, options);
+  };
+  render() {
+    return (
+      <div>
+        <form className="login" onSubmit={this.handleSubmit}>
+          <h2>Login</h2>
+          {this.renderInput("text", "username", "@username")}
+          {this.renderInput("password", "password", "password")}
+          <input type="submit" value="Login" />
+        </form>
+      </div>
+    );
+  }
+}
+
+export default Login;
