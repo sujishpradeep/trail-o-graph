@@ -3,20 +3,22 @@ import TrailFeed from "./trailfeed";
 import Banner from "./banner";
 import Filters from "./filters";
 import { getTrails, postTrails } from "../services/trailService";
-import {
-  getProfile,
-  updateProfileBookMarked
-} from "../services/profileService";
+
 import { addOrRemoveFromArray } from "../generic/arrays";
+import { updateUserBookMarked, getUser } from "../services/authservice";
 
 class MainPage extends Component {
-  state = { trailCards: [], profileInfo: {} };
+  state = { trailCards: [], user: { bookMarked: [] } };
 
   async componentDidMount() {
     const { data: trailCards } = await getTrails();
-    const { data: profileInfo } = await getProfile("P1");
+    if (this.props.user) {
+      const { data: user } = await getUser(this.props.user.username);
+      this.setState({ user });
+    }
+
     const showBookMarked = false;
-    this.setState({ trailCards, profileInfo, showBookMarked });
+    this.setState({ trailCards, showBookMarked });
   }
 
   handleAddTrail = async () => {
@@ -36,28 +38,30 @@ class MainPage extends Component {
   };
 
   handleBookMarkClick = async trailId => {
-    const { profileInfo } = this.state;
-    let profileBookMarked = profileInfo.bookMarked;
-    profileBookMarked = addOrRemoveFromArray(profileBookMarked, trailId);
-    profileInfo.bookMarked = profileBookMarked;
-    this.setState({ profileInfo });
-    await updateProfileBookMarked(profileInfo._id, profileInfo.bookMarked);
+    const { user } = this.state;
+    if (!user.username) {
+      window.location = "/signup";
+      return;
+    }
+    let userBookMarked = user.bookMarked;
+    userBookMarked = addOrRemoveFromArray(userBookMarked, trailId);
+    user.bookMarked = userBookMarked;
+    this.setState({ user });
+    await updateUserBookMarked(user.username, user.bookMarked);
   };
 
   handleFilterBookMark = async () => {
-    let { showBookMarked, trailCards, profileInfo } = this.state;
+    let { showBookMarked, trailCards, user } = this.state;
     showBookMarked = !showBookMarked;
     const { data: originalTrailCards } = await getTrails();
     trailCards = showBookMarked
-      ? (trailCards = trailCards.filter(t =>
-          profileInfo.bookMarked.includes(t._id)
-        ))
+      ? (trailCards = trailCards.filter(t => user.bookMarked.includes(t._id)))
       : originalTrailCards;
     this.setState({ showBookMarked, trailCards });
   };
 
   render() {
-    const { trailCards, profileInfo, showBookMarked } = this.state;
+    const { trailCards, user, showBookMarked } = this.state;
 
     return (
       <React.Fragment>
@@ -68,7 +72,7 @@ class MainPage extends Component {
         />
         <TrailFeed
           trailCards={trailCards}
-          profileInfo={profileInfo}
+          user={user}
           onBookMarkClick={this.handleBookMarkClick}
         />
         <button onClick={this.handleAddTrail}>add</button>

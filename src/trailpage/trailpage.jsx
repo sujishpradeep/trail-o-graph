@@ -1,49 +1,89 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import TrailReview from "./trailreview";
 import Peace from "../common/peace";
 import { addOrRemoveFromArray } from "../generic/arrays";
 import { getTrail, updateTrailPeace } from "../services/trailService";
-import { getProfile, updateProfilePeace } from "../services/profileService";
-import { getReviewsByTrail } from "../services/reviewService";
+import { getReviewsByTrail, addReview } from "../services/reviewService";
+import axios from "axios";
 import "../td.css";
-
-class TrailPage extends Component {
-  state = { trailInfo: {}, profileInfo: {}, trailReviews: [] };
+import { updateUserPeace, getUser } from "../services/authservice";
+import Form from "../common/forms";
+class TrailPage extends Form {
+  state = {
+    trailInfo: {},
+    userInfo: { peaceMarked: [] },
+    trailReviews: [],
+    data: { review: "" },
+    errors: {}
+  };
 
   async componentDidMount() {
     const { data: trailInfo } = await getTrail(this.props.match.params.id);
-    const { data: profileInfo } = await getProfile("P1");
     const { data: trailReviews } = await getReviewsByTrail(trailInfo._id);
-    this.setState({ profileInfo, trailInfo, trailReviews });
+    if (this.props.user) {
+      const { data: user } = await getUser(this.props.user.username);
+
+      this.setState({ userInfo: user });
+    }
+
+    this.setState({ trailInfo, trailReviews });
     window.scrollTo(0, 0);
   }
 
   handlePeaceClick = async trailId => {
-    const { trailInfo, profileInfo } = this.state;
-    let profilePeaceMarked = profileInfo.peaceMarked;
+    const { trailInfo, userInfo } = this.state;
+    if (!userInfo.username) {
+      window.location = "/signup";
+      return;
+    }
 
-    //onPeaceClick -> add 1 to peaceCount of the trail, if profile has not peaceMarked in original State,
-    //                reduce 1 from peaceCount if profile has already peaceMarked in original State
-    const counter = profilePeaceMarked.includes(trailId) ? -1 : 1;
+    let userPeaceMarked = userInfo.peaceMarked;
+
+    //onPeaceClick -> add 1 to peaceCount of the trail, if user has not peaceMarked in original State,
+    //                reduce 1 from peaceCount if user has already peaceMarked in original State
+    const counter = userPeaceMarked.includes(trailId) ? -1 : 1;
     trailInfo.peaceCount += counter;
 
-    const peaceMarked = addOrRemoveFromArray(profilePeaceMarked, trailId);
-    profileInfo.peaceMarked = peaceMarked;
-    this.setState({ trailInfo, profileInfo });
+    const peaceMarked = addOrRemoveFromArray(userPeaceMarked, trailId);
+    userInfo.peaceMarked = peaceMarked;
+    this.setState({ trailInfo, userInfo });
 
     await updateTrailPeace(trailInfo._id, counter);
-    await updateProfilePeace(profileInfo._id, peaceMarked);
+    await updateUserPeace(userInfo.username, peaceMarked);
+  };
+
+  doSubmit = async () => {
+    const randomID = Math.round(Math.random() * 100000);
+    let { _id, name, state } = this.state.trailInfo;
+
+    //MONGO DB temporory code
+    const { data } = await axios.get(
+      `http://localhost:3000/api/profiles/${this.props.user.profileid}`
+    );
+
+    const reviewInfo = {
+      _id: randomID,
+      user_id: data._id,
+      user_name: this.props.user.fullname,
+      profilePicPath: data.profilePicPath,
+      trail_id: _id,
+      trail_name: name,
+      trail_state: state,
+      content: this.state.data.review
+    };
+    await addReview(reviewInfo);
+    window.location = `/trail/${this.state.trailInfo._id}`;
   };
 
   render() {
-    const { trailInfo, profileInfo, trailReviews } = this.state;
-    const { _id, name, peaceCount, height } = trailInfo;
+    const { trailInfo, userInfo, trailReviews } = this.state;
 
+    let { _id, name, peaceCount, height } = trailInfo;
     const peaceMarked =
-      Object.keys(profileInfo).length === 0
+      Object.keys(userInfo).length === 0
         ? false
-        : profileInfo.peaceMarked.includes(_id);
+        : userInfo.peaceMarked.includes(_id);
 
     return (
       <div className="td-body">
@@ -114,9 +154,16 @@ class TrailPage extends Component {
             </div>
           </div>
 
+          <div>
+            <form className="addreview" onSubmit={this.handleSubmit}>
+              {this.renderInput("review", "review", "@review")}
+              <input type="submit" value="addreview" />
+            </form>
+          </div>
           <div className="td-exp-container  ">
             <h3 id="td-exp">Trail stories</h3>
           </div>
+
           {trailReviews.map(reviewInfo => (
             <TrailReview key={reviewInfo._id} reviewInfo={reviewInfo} />
           ))}

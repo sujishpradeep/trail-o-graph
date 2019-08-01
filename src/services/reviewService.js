@@ -12,3 +12,7 @@ export function getReviewsByTrail(id) {
 export function deleteReview(id) {
   return http.delete(apiReviews + "/" + id);
 }
+
+export function addReview(reviewInfo) {
+  return http.post(apiReviews, reviewInfo);
+}

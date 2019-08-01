@@ -4,6 +4,7 @@ import ProfileReview from "./profilereview";
 import { getProfile } from "../services/profileService";
 import { getReviewsByProfile, deleteReview } from "../services/reviewService";
 import "../pd.css";
+import { apiUrl } from "../config.json";
 
 class ProfilePage extends Component {
   state = { profileInfo: {}, profileReviews: [] };
@@ -11,6 +12,9 @@ class ProfilePage extends Component {
   async componentDidMount() {
     const { data: profileInfo } = await getProfile(this.props.match.params.id);
     const { data: profileReviews } = await getReviewsByProfile(profileInfo._id);
+
+    profileInfo.profilePicPath = apiUrl + "/" + profileInfo.profilePicPath;
+
     this.setState({ profileInfo, profileReviews });
     window.scrollTo(0, 0);
   }
@@ -33,7 +37,7 @@ class ProfilePage extends Component {
 
   render() {
     let { profileInfo, profileReviews } = this.state;
-    const { _id, name, place, bio } = profileInfo;
+    let { _id, name, place, bio, profilePicPath } = profileInfo;
 
     return (
       <div className="pd-body">
@@ -41,11 +45,7 @@ class ProfilePage extends Component {
           <div id="pd-profile-header">
             <Link to={`/profile/${_id}`} style={{ textDecoration: "none" }}>
               <div className="pd-profile-pic-container ">
-                <img
-                  src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
-                  alt="Reviewer "
-                  id="pd-profile-pic"
-                />
+                <img src={profilePicPath} alt="Reviewer " id="pd-profile-pic" />
               </div>
             </Link>
             <div id="pd-profile-desc">

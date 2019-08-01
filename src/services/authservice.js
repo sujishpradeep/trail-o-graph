@@ -2,9 +2,14 @@ import http from "./httpservice";
 import { apiUsers } from "../config.json";
 const jwtDecode = require("jwt-decode");
 
+http.setJwt(getJwt());
+
+export function getUser(id) {
+  return http.get(apiUsers + "/" + id);
+}
+
 export async function login(user) {
   const { data: jwt } = await http.post(apiUsers + "/auth/", user);
-  console.log("jwt", jwt);
   localStorage.setItem("token", jwt);
 }
 
@@ -27,8 +32,21 @@ export async function signUp(user) {
   window.location = "/";
 }
 
+export function getJwt() {
+  return localStorage.getItem("token");
+}
+
+export function updateUserBookMarked(id, bookMarked) {
+  http.put(`${apiUsers}/${id}`, bookMarked);
+}
+
+export function updateUserPeace(id, peaceMarked) {
+  http.put(apiUsers + "/peace/" + id, peaceMarked);
+}
+
 export default {
   login,
   logout,
-  getCurrentUser
+  getCurrentUser,
+  getJwt
 };

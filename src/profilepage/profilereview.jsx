@@ -25,9 +25,6 @@ const ProfileReview = ({ profileReview, onReviewDelete }) => {
             </Link>
             <p>{profileReview.trail_state}</p>
           </div>
-          <div id="pd-trail-height">
-            <h2> {profileReview.trail_height} feet</h2>
-          </div>
         </div>
         <div className="pd-review-content  ">
           <p>{profileReview.content}</p>
@@ -38,7 +35,21 @@ const ProfileReview = ({ profileReview, onReviewDelete }) => {
             enchants the eye and makes it worth the trek.
           </p>
         </div>
-        <div id="pd-review-photos">
+      </div>
+      <button onClick={() => onReviewDelete(profileReview._id)}>Delete</button>
+    </div>
+  );
+};
+
+export default ProfileReview;
+
+/*
+ <div id="pd-trail-height">
+            <h2> {profileReview.trail_height} feet</h2>
+          </div>
+
+          
+<div id="pd-review-photos">
           <img
             src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
             alt="Reviewer "
@@ -55,10 +66,4 @@ const ProfileReview = ({ profileReview, onReviewDelete }) => {
             id="pd-rev-pic"
           />
         </div>
-      </div>
-      <button onClick={() => onReviewDelete(profileReview._id)}>Delete</button>
-    </div>
-  );
-};
-
-export default ProfileReview;
+        */

@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../config.json";
 
 const TrailReview = ({ reviewInfo }) => {
+  const profilePicPath = apiUrl + "/" + reviewInfo.profilePicPath;
+
   return (
     <div className="td-review-container  ">
       <div className="td-review-header  ">
@@ -10,11 +13,7 @@ const TrailReview = ({ reviewInfo }) => {
           style={{ textDecoration: "none" }}
         >
           <div className="td-profile-pic ">
-            <img
-              src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
-              alt="Reviewer "
-              id="td-rev-profile-pic"
-            />
+            <img src={profilePicPath} alt="Reviewer " id="td-rev-profile-pic" />
           </div>
         </Link>
 
@@ -36,25 +35,27 @@ const TrailReview = ({ reviewInfo }) => {
           the eye and makes it worth the trek.
         </p>
       </div>
-      <div className="td-review-photos">
-        <img
-          src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
-          alt="Reviewer "
-          id="td-rev-pic"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
-          alt="Reviewer "
-          id="td-rev-pic"
-        />
-        <img
-          src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
-          alt="Reviewer "
-          id="td-rev-pic"
-        />
-      </div>
     </div>
   );
 };
 
 export default TrailReview;
+
+/*
+<div className="td-review-photos">
+<img
+  src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
+  alt="Reviewer "
+  id="td-rev-pic"
+/>
+<img
+  src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
+  alt="Reviewer "
+  id="td-rev-pic"
+/>
+<img
+  src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
+  alt="Reviewer "
+  id="td-rev-pic"
+/>
+</div>*/

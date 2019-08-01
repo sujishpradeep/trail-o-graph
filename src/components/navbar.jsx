@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NavBar = ({ user }) => {
-  console.log("user 2", user);
   return (
     <div id="navbar">
       <div id="nav-trailo">
@@ -21,7 +20,7 @@ const NavBar = ({ user }) => {
       {user && (
         <div id="nav-user">
           <div id="nav-login">
-            <Link to="/">{user.fullname}</Link>
+            <Link to={`/update/${user.username}`}>{user.fullname}</Link>
           </div>
           <div id="nav-signup">
             <Link to="/logout">Logout</Link>

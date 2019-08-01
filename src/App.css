@@ -28,12 +28,19 @@ body {
   font-style: normal;
 }
 
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .footer {
   flex-shrink: 0;
-  padding: 20px;
-  background-color: #d8dbdb;
   height: 100px;
-  margin-top: 50px;
+  background-color: #d8dbdb;
+}
+.page-body {
+  flex-grow: 1;
 }
 
 @import url("https://fonts.googleapis.com/css?family=Pacifico");

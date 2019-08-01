@@ -2,14 +2,14 @@ import React from "react";
 import TrailPicMain from "./trailpicmain";
 import TrailStats from "./trailstats";
 
-const TrailCard = ({ trailCard, profileInfo, onBookMarkClick }) => {
-  const bookMarked = profileInfo.bookMarked.includes(trailCard._id);
+const TrailCard = ({ trailCard, user, onBookMarkClick }) => {
+  const bookMarked = user.bookMarked.includes(trailCard._id);
 
   return (
     <div>
       <div className="trail-grid-item">
         <TrailPicMain
-          coverPhoto={trailCard.coverPhoto}
+          coverPhotoPath={trailCard.coverPhotoPath}
           trailId={trailCard._id}
         />
         <TrailStats
