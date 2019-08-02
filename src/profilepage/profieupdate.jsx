@@ -20,7 +20,7 @@ class ProfileUpdate extends Component {
     );
 
     try {
-      await axios.post(apiProfiles, fd);
+      await axios.put(`${apiProfiles}/${this.props.user.profileid}`, fd);
     } catch (ex) {}
   };
 

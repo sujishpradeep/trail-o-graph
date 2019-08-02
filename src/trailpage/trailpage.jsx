@@ -64,7 +64,6 @@ class TrailPage extends Form {
     );
 
     const reviewInfo = {
-      _id: randomID,
       user_id: data._id,
       user_name: this.props.user.fullname,
       profilePicPath: data.profilePicPath,
