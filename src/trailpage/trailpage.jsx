@@ -20,6 +20,7 @@ class TrailPage extends Form {
 
   async componentDidMount() {
     const { data: trailInfo } = await getTrail(this.props.match.params.id);
+    console.log("trailInfo", trailInfo);
     const { data: trailReviews } = await getReviewsByTrail(trailInfo._id);
     if (this.props.user) {
       const { data: user } = await getUser(this.props.user.username);
@@ -38,7 +39,7 @@ class TrailPage extends Form {
       return;
     }
 
-    let userPeaceMarked = userInfo.peaceMarked;
+    let userPeaceMarked = userInfo.peaceMarked || [];
 
     //onPeaceClick -> add 1 to peaceCount of the trail, if user has not peaceMarked in original State,
     //                reduce 1 from peaceCount if user has already peaceMarked in original State
@@ -49,7 +50,7 @@ class TrailPage extends Form {
     userInfo.peaceMarked = peaceMarked;
     this.setState({ trailInfo, userInfo });
 
-    await updateTrailPeace(trailInfo._id, counter);
+    await updateTrailPeace(trailInfo._id, trailInfo.peaceCount);
     await updateUserPeace(userInfo.username, peaceMarked);
   };
 
@@ -83,7 +84,7 @@ class TrailPage extends Form {
     const peaceMarked =
       Object.keys(userInfo).length === 0
         ? false
-        : userInfo.peaceMarked.includes(_id);
+        : userInfo.peaceMarked && userInfo.peaceMarked.includes(_id);
 
     return (
       <div className="td-body">

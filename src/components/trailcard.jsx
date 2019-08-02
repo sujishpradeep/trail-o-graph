@@ -3,7 +3,7 @@ import TrailPicMain from "./trailpicmain";
 import TrailStats from "./trailstats";
 
 const TrailCard = ({ trailCard, user, onBookMarkClick }) => {
-  const bookMarked = user.bookMarked.includes(trailCard._id);
+  const bookMarked = user.bookMarked && user.bookMarked.includes(trailCard._id);
 
   return (
     <div>

@@ -21,7 +21,7 @@ const ProfileReview = ({ profileReview, onReviewDelete }) => {
               to={`/trail/${profileReview.trail_id}`}
               style={{ textDecoration: "none" }}
             >
-              <h2 id="profile-name">{profileReview.trail_name}</h2>
+              <h2 id="profile-name">{profileReview.name}</h2>
             </Link>
             <p>{profileReview.trail_state}</p>
           </div>

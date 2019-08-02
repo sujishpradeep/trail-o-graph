@@ -43,7 +43,7 @@ class MainPage extends Component {
       window.location = "/signup";
       return;
     }
-    let userBookMarked = user.bookMarked;
+    let userBookMarked = user.bookMarked || [];
     userBookMarked = addOrRemoveFromArray(userBookMarked, trailId);
     user.bookMarked = userBookMarked;
     this.setState({ user });
