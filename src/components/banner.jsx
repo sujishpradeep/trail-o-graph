@@ -12,16 +12,7 @@ const Banner = () => {
           <b className="brand-banner__subheader">
             Discovering the mountains of the world
           </b>
-          <div className="explore-container">
-            <button className="btn-exp">
-              <Link
-                to="/signup"
-                style={{ textDecoration: "none", color: "white" }}
-              >
-                Signup
-              </Link>
-            </button>
-          </div>
+          <div className="explore-container" />
         </header>
       </section>
       <div className="brand-png " />
@@ -30,3 +21,14 @@ const Banner = () => {
 };
 
 export default Banner;
+
+/*
+<button className="btn-exp">
+<Link
+  to="/signup"
+  style={{ textDecoration: "none", color: "white" }}
+>
+  Signup
+</Link>
+</button>
+*/

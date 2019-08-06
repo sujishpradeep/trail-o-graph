@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { apiProfiles } from "../config.json";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
 import { apiUrl } from "../config.json";
 import auth from "../services/authservice";
 import Form from "../common/forms";
@@ -33,8 +33,8 @@ class ProfileUpdate extends Form {
 
   doSubmit = async () => {
     const fd = new FormData();
-    fd.append("name", this.state.user.fullname);
     fd.append("_id", this.state.user.profileid);
+    // fd.append("name", this.state.data.name);
     fd.append("bio", this.state.data.bio);
     fd.append("place", this.state.data.place);
 
@@ -49,8 +49,8 @@ class ProfileUpdate extends Form {
       try {
         await axios.put(apiProfiles + "/data/" + this.props.user.profileid, {
           place: this.state.data.place,
-          bio: this.state.data.bio,
-          name: this.state.user.fullname
+          bio: this.state.data.bio
+          //      name: this.state.data.name
         });
       } catch (ex) {}
     }
@@ -71,11 +71,15 @@ class ProfileUpdate extends Form {
               </div>
             )}
 
-            <div class="fileUpload">
-              <input type="file" onChange={this.fileSelected} class="upload" />
+            <div className="fileUpload">
+              <input
+                type="file"
+                onChange={this.fileSelected}
+                className="upload"
+              />
               <span>Change display pic</span>
             </div>
-            {this.renderInput("text", "name", "Full Name")}
+
             {this.renderInput("text", "place", "City or Town")}
             {this.renderInput("text", "bio", "Bio")}
             <input type="submit" value="Save" />
@@ -88,8 +92,7 @@ class ProfileUpdate extends Form {
 
 export default ProfileUpdate;
 
-{
-  /* <div className="pd-update">
+/* <div className="pd-update">
 <button onClick={this.fileUpload} />
-</div> */
-}
+</div> 
+       {this.renderInput("text", "name", "Full Name")}*/

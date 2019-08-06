@@ -51,7 +51,7 @@ class Login extends Form {
           {this.renderInput("text", "username", "@username")}
           {this.renderInput("password", "password", "password")}
           <input type="submit" value="Login" />
-          <div class="links">
+          <div className="links">
             <Link to="/signup">Signup</Link>
           </div>
         </form>

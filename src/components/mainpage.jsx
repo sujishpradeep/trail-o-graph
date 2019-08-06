@@ -20,23 +20,6 @@ class MainPage extends Component {
     const showBookMarked = false;
     this.setState({ trailCards, showBookMarked });
   }
-
-  handleAddTrail = async () => {
-    const trailCard = {
-      _id: "A5",
-      name: "Shimla",
-      state: "Himachal Pradesh",
-      height: 7457,
-      publishDate: "2018-01-03T19:04:28.809Z",
-      coverPhoto: "/images/ziro.jpeg",
-      coverPhotoUploader: "Sujish",
-      peaceCount: 700
-    };
-    const trailCards = [trailCard, ...this.state.trailCards];
-    this.setState({ trailCards });
-    await postTrails(trailCard);
-  };
-
   handleBookMarkClick = async trailId => {
     const { user } = this.state;
     if (!user.username) {
@@ -74,7 +57,6 @@ class MainPage extends Component {
           user={user}
           onBookMarkClick={this.handleBookMarkClick}
         />
-        <button onClick={this.handleAddTrail}>add</button>
       </React.Fragment>
     );
   }

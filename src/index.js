@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import logger from "./services/logService";
+//import "bootstrap/dist/css/bootstrap.css";
 
 logger.init();
 ReactDOM.render(<App />, document.getElementById("root"));

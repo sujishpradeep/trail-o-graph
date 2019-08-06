@@ -54,6 +54,9 @@ class TrailPage extends Form {
   };
 
   doSubmit = async () => {
+    if (!this.props.user) {
+      window.location = "/login";
+    }
     let { _id, name, state } = this.state.trailInfo;
 
     //MONGO DB temporory code
@@ -127,7 +130,6 @@ class TrailPage extends Form {
               <h3 id="td-adress-desc mb5">Location</h3>
               <p id="td-address">Pitt street, Sydney 2135</p>
               <br />
-              <h4 id="td-address-map">Map</h4>
             </div>
 
             <div className="td-op-info ">
@@ -198,3 +200,12 @@ class TrailPage extends Form {
 }
 
 export default TrailPage;
+
+/*
+  <div className="td-address-info ">
+              <h3 id="td-adress-desc mb5">Location</h3>
+              <p id="td-address">Pitt street, Sydney 2135</p>
+              <br />
+              <h4 id="td-address-map">Map</h4>
+            </div>
+            */

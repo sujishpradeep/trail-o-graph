@@ -46,7 +46,6 @@ class App extends Component {
               render={props => <MainPage {...props} user={user} />}
             />
           </body-container-2>
-          <Footer />
         </body-container>
       </Router>
     );

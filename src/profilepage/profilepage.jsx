@@ -8,21 +8,21 @@ import { apiUrl } from "../config.json";
 import auth from "../services/authservice";
 
 class ProfilePage extends Component {
-  state = { profileInfo: {}, profileReviews: [], username: " " };
+  state = { profileInfo: {}, profileReviews: [], showedit: false };
 
   async componentDidMount() {
     const user = auth.getCurrentUser();
-    let username = "";
+
+    let showedit = false;
     if (user) {
-      username = user.username;
+      showedit = user.profileid === this.props.match.params.id ? true : false;
     }
-    username = "abc";
     const { data: profileInfo } = await getProfile(this.props.match.params.id);
     const { data: profileReviews } = await getReviewsByProfile(profileInfo._id);
 
     profileInfo.profilePicPath = apiUrl + "/" + profileInfo.profilePicPath;
 
-    this.setState({ profileInfo, profileReviews, username });
+    this.setState({ profileInfo, profileReviews, showedit });
     window.scrollTo(0, 0);
   }
 
@@ -67,7 +67,7 @@ class ProfilePage extends Component {
               <p id="pd-profile-bio">{bio}</p>
             </div>
           </div>
-          {this.state.username && (
+          {this.state.showedit && (
             <button className="btn-lowkey">
               <Link
                 to={`/update/${this.state.username}`}
@@ -86,6 +86,7 @@ class ProfilePage extends Component {
             key={profileReview._id}
             profileReview={profileReview}
             onReviewDelete={this.handleReviewDelete}
+            showedit={this.state.showedit}
           />
         ))}
       </div>

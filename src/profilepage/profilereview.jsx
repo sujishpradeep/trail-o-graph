@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProfileReview = ({ profileReview, onReviewDelete }) => {
+const ProfileReview = ({ profileReview, onReviewDelete, showedit }) => {
   return (
     <div className="pd-outer-container">
       <div className="pd-review-container  ">
@@ -25,6 +25,22 @@ const ProfileReview = ({ profileReview, onReviewDelete }) => {
             </Link>
             <p>{profileReview.trail_state}</p>
           </div>
+          {showedit && (
+            <button
+              type="button"
+              className="btn btn-danger btn-xs"
+              style={{
+                height: "30px",
+                backgroundColor: "#d0021b",
+                color: "white",
+                cursor: "pointer",
+                fontSize: "14px"
+              }}
+              onClick={() => onReviewDelete(profileReview._id)}
+            >
+              Delete
+            </button>
+          )}
         </div>
         <div className="pd-review-content  ">
           {profileReview.content.map((r, i) => (
@@ -32,7 +48,6 @@ const ProfileReview = ({ profileReview, onReviewDelete }) => {
           ))}
         </div>
       </div>
-      <button onClick={() => onReviewDelete(profileReview._id)}>Delete</button>
     </div>
   );
 };
