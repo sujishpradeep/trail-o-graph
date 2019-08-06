@@ -40,7 +40,7 @@ class MainPage extends Component {
   handleBookMarkClick = async trailId => {
     const { user } = this.state;
     if (!user.username) {
-      window.location = "/signup";
+      window.location = "/login";
       return;
     }
     let userBookMarked = user.bookMarked || [];
@@ -62,7 +62,6 @@ class MainPage extends Component {
 
   render() {
     const { trailCards, user, showBookMarked } = this.state;
-
     return (
       <React.Fragment>
         <Banner />

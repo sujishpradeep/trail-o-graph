@@ -20,7 +20,12 @@ const NavBar = ({ user }) => {
       {user && (
         <div id="nav-user">
           <div id="nav-login">
-            <Link to={`/update/${user.username}`}>{user.fullname}</Link>
+            <Link
+              to={`/profile/${user.profileid}`}
+              style={{ textDecoration: "none" }}
+            >
+              {user.fullname}
+            </Link>
           </div>
           <div id="nav-signup">
             <Link to="/logout">Logout</Link>
@@ -32,3 +37,5 @@ const NavBar = ({ user }) => {
 };
 
 export default NavBar;
+
+//  <Link to={`/update/${user.username}`}>{user.fullname}</Link>

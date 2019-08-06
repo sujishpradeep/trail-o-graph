@@ -5,17 +5,24 @@ import { getProfile } from "../services/profileService";
 import { getReviewsByProfile, deleteReview } from "../services/reviewService";
 import "../pd.css";
 import { apiUrl } from "../config.json";
+import auth from "../services/authservice";
 
 class ProfilePage extends Component {
-  state = { profileInfo: {}, profileReviews: [] };
+  state = { profileInfo: {}, profileReviews: [], username: " " };
 
   async componentDidMount() {
+    const user = auth.getCurrentUser();
+    let username = "";
+    if (user) {
+      username = user.username;
+    }
+    username = "abc";
     const { data: profileInfo } = await getProfile(this.props.match.params.id);
     const { data: profileReviews } = await getReviewsByProfile(profileInfo._id);
 
     profileInfo.profilePicPath = apiUrl + "/" + profileInfo.profilePicPath;
 
-    this.setState({ profileInfo, profileReviews });
+    this.setState({ profileInfo, profileReviews, username });
     window.scrollTo(0, 0);
   }
 
@@ -48,6 +55,7 @@ class ProfilePage extends Component {
                 <img src={profilePicPath} alt="Reviewer " id="pd-profile-pic" />
               </div>
             </Link>
+
             <div id="pd-profile-desc">
               <Link to={`/profile/${_id}`} style={{ textDecoration: "none" }}>
                 <h2 id="pd-profile-name">{name}</h2>
@@ -59,6 +67,16 @@ class ProfilePage extends Component {
               <p id="pd-profile-bio">{bio}</p>
             </div>
           </div>
+          {this.state.username && (
+            <button className="btn-lowkey">
+              <Link
+                to={`/update/${this.state.username}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                Edit profile
+              </Link>
+            </button>
+          )}
         </div>
         <div id="trailline">
           <h2> Trail stories</h2>

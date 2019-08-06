@@ -175,6 +175,7 @@ h4 {
   letter-spacing: 0.5px;
   background-color: white;
   border-radius: 5px;
+  display: flex;
 }
 
 #pd-profile-header {
@@ -183,6 +184,7 @@ h4 {
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+  flex-grow: 2;
 }
 
 #pd-profile-pic {
@@ -191,7 +193,11 @@ h4 {
   height: 80px;
   border: 1px solid #d5d1cc;
   border-radius: 60px;
-  flex-grow: 1;
+}
+
+.pd-profile-pic-container {
+  margin-top: 20px;
+  margin-left: 100px;
 }
 
 #pd-profile-desc {
@@ -240,4 +246,75 @@ h4 {
       margin: 0 25vw;
     }
   }
+}
+
+.btn-lowkey {
+  text-align: center;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.32);
+  background: none;
+  width: 90px;
+  height: 20px;
+  margin: 10px;
+  outline: none;
+  cursor: pointer;
+  padding: 2px;
+}
+.btn-lowkey:hover {
+  border: 1px solid rgba(0, 0, 0, 1);
+}
+.btn-lowkey:active {
+  outline: none;
+}
+
+.fileUpload {
+  background: #00bcbe;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin: 1.25em auto; /*20px/16px 0*/
+  overflow: hidden;
+  padding: 0.5em; /*14px/16px*/
+  position: relative;
+  text-align: center;
+  width: 120px;
+  cursor: pointer;
+}
+.fileUpload:hover,
+.fileUpload:active,
+.fileUpload:focus {
+  background: #00a2a4;
+  cursor: pointer;
+}
+.fileUpload input.upload {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  width: 148px;
+  height: 46px;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  position: fixed;
+  right: 100%;
+  bottom: 100%;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }

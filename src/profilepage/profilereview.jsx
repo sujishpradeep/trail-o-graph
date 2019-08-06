@@ -27,13 +27,9 @@ const ProfileReview = ({ profileReview, onReviewDelete }) => {
           </div>
         </div>
         <div className="pd-review-content  ">
-          <p>{profileReview.content}</p>
-
-          <p>
-            Amazing place to visit with family. The place is kids friendly,
-            although one cannot take pets along. The mistic sunrise just
-            enchants the eye and makes it worth the trek.
-          </p>
+          {profileReview.content.map((r, i) => (
+            <p key={i}>{r}</p>
+          ))}
         </div>
       </div>
       <button onClick={() => onReviewDelete(profileReview._id)}>Delete</button>

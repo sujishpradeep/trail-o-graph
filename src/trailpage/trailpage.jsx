@@ -20,7 +20,6 @@ class TrailPage extends Form {
 
   async componentDidMount() {
     const { data: trailInfo } = await getTrail(this.props.match.params.id);
-    console.log("trailInfo", trailInfo);
     const { data: trailReviews } = await getReviewsByTrail(trailInfo._id);
     if (this.props.user) {
       const { data: user } = await getUser(this.props.user.username);
@@ -35,7 +34,7 @@ class TrailPage extends Form {
   handlePeaceClick = async trailId => {
     const { trailInfo, userInfo } = this.state;
     if (!userInfo.username) {
-      window.location = "/signup";
+      window.location = "/login";
       return;
     }
 
@@ -55,13 +54,14 @@ class TrailPage extends Form {
   };
 
   doSubmit = async () => {
-    const randomID = Math.round(Math.random() * 100000);
     let { _id, name, state } = this.state.trailInfo;
 
     //MONGO DB temporory code
     const { data } = await axios.get(
       `http://localhost:3000/api/profiles/${this.props.user.profileid}`
     );
+
+    const reviewArray = this.state.data.review.split(/\r?\n/);
 
     const reviewInfo = {
       user_id: data._id,
@@ -70,8 +70,9 @@ class TrailPage extends Form {
       trail_id: _id,
       trail_name: name,
       trail_state: state,
-      content: this.state.data.review
+      content: reviewArray
     };
+
     await addReview(reviewInfo);
     window.location = `/trail/${this.state.trailInfo._id}`;
   };
@@ -154,15 +155,38 @@ class TrailPage extends Form {
             </div>
           </div>
 
-          <div>
-            <form className="addreview" onSubmit={this.handleSubmit}>
-              {this.renderInput("review", "review", "@review")}
-              <input type="submit" value="addreview" />
+          {trailReviews.length === 0 && (
+            <div className="td-exp-container  ">
+              <h3 id="td-exp">Be the first to share the experience</h3>
+            </div>
+          )}
+          {trailReviews.length !== 0 && (
+            <div className="td-exp-container  ">
+              <h3 id="td-exp">Share your experience</h3>
+            </div>
+          )}
+          <div className="add-review-countainer">
+            <form id="td-review-form" onSubmit={this.handleSubmit}>
+              {this.renderTextArea(
+                "review",
+                "review",
+                "Share your trail story",
+                "td-review-text-area"
+              )}
+              <button
+                type="submit"
+                className="btn btn-success"
+                id="td-review-submit"
+              >
+                Publish story
+              </button>
             </form>
           </div>
-          <div className="td-exp-container  ">
-            <h3 id="td-exp">Trail stories</h3>
-          </div>
+          {trailReviews.length > 0 && (
+            <div className="td-exp-container  ">
+              <h3 id="td-exp">Trail stories</h3>
+            </div>
+          )}
 
           {trailReviews.map(reviewInfo => (
             <TrailReview key={reviewInfo._id} reviewInfo={reviewInfo} />

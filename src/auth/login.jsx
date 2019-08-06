@@ -2,6 +2,7 @@ import React from "react";
 import "../login.css";
 import auth from "../services/authservice";
 import Form from "../common/forms";
+import { Link } from "react-router-dom";
 const Joi = require("joi");
 
 class Login extends Form {
@@ -50,6 +51,9 @@ class Login extends Form {
           {this.renderInput("text", "username", "@username")}
           {this.renderInput("password", "password", "password")}
           <input type="submit" value="Login" />
+          <div class="links">
+            <Link to="/signup">Signup</Link>
+          </div>
         </form>
       </div>
     );

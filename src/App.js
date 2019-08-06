@@ -32,7 +32,10 @@ class App extends Component {
               path="/trail/:id"
               render={props => <TrailPage {...props} user={user} />}
             />
-            <Route path="/profile/:id" component={ProfilePage} />
+            <Route
+              path="/profile/:id"
+              render={props => <ProfilePage {...props} user={user} />}
+            />
             <Route
               path="/update/:id"
               render={props => <ProfileUpdate {...props} user={user} />}

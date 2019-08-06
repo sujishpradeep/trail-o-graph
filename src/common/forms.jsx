@@ -32,6 +32,24 @@ class Form extends Component {
       </React.Fragment>
     );
   }
+
+  renderTextArea(type, name, placeholder, className) {
+    const { errors } = this.state;
+    const error = errors[name];
+
+    return (
+      <React.Fragment>
+        <textarea
+          type={type}
+          placeholder={placeholder}
+          name={name}
+          onChange={this.handleChange}
+          className={className}
+        />
+        {error && <div className="alert alert-danger">{error}</div>}
+      </React.Fragment>
+    );
+  }
 }
 
 export default Form;

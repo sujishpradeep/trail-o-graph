@@ -27,13 +27,9 @@ const TrailReview = ({ reviewInfo }) => {
         </div>
       </div>
       <div className="td-review-content  ">
-        <p>{reviewInfo.content}</p>
-
-        <p>
-          Amazing place to visit with family. The place is kids friendly,
-          although one cannot take pets along. The mistic sunrise just enchants
-          the eye and makes it worth the trek.
-        </p>
+        {reviewInfo.content.map((r, i) => (
+          <p key={i}>{r}</p>
+        ))}
       </div>
     </div>
   );
