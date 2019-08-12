@@ -1,29 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { apiUrl } from "../config.json";
 
 const ProfileReview = ({ profileReview, onReviewDelete, showedit }) => {
+  const coverPhotoPath = apiUrl + "/" + profileReview.trail.coverPhotoPath;
+
   return (
     <div className="pd-outer-container">
       <div className="pd-review-container  ">
         <div className="pd-review-header  ">
           <Link
-            to={`/trail/${profileReview.trail_id}`}
+            to={`/trail/${profileReview.trail._id}`}
             style={{ textDecoration: "none" }}
           >
-            <img
-              src="https://images.unsplash.com/photo-1495613455702-836d1327ebc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1480&q=80"
-              alt="Trail "
-              id="pd-trail-pic"
-            />
+            <img src={coverPhotoPath} alt="Trail " id="pd-trail-pic" />
           </Link>
           <div className="pd-trail-name">
             <Link
-              to={`/trail/${profileReview.trail_id}`}
+              to={`/trail/${profileReview.trail._id}`}
               style={{ textDecoration: "none" }}
             >
-              <h2 id="profile-name">{profileReview.name}</h2>
+              <h2 id="profile-name">{profileReview.trail.name}</h2>
             </Link>
-            <p>{profileReview.trail_state}</p>
+            <p>{profileReview.trail.state}</p>
           </div>
           {showedit && (
             <button

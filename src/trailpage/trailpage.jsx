@@ -57,22 +57,20 @@ class TrailPage extends Form {
     if (!this.props.user) {
       window.location = "/login";
     }
-    let { _id, name, state } = this.state.trailInfo;
+    let { _id } = this.state.trailInfo;
 
-    //MONGO DB temporory code
-    const { data } = await axios.get(
-      `http://localhost:3000/api/profiles/${this.props.user.profileid}`
-    );
+    // //MONGO DB temporory code
+    // const { data } = await axios.get(
+    //   `http://localhost:3000/api/profiles/${this.props.user.profileid}`
+    // );
 
     const reviewArray = this.state.data.review.split(/\r?\n/);
 
+    console.log("this.props.user.profileId", this.props.user.profileId);
+
     const reviewInfo = {
-      user_id: data._id,
-      user_name: this.props.user.fullname,
-      profilePicPath: data.profilePicPath,
-      trail_id: _id,
-      trail_name: name,
-      trail_state: state,
+      trailId: _id,
+      profileId: this.props.user.profileid,
       content: reviewArray
     };
 

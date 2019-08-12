@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { apiUrl } from "../config.json";
 
 const TrailReview = ({ reviewInfo }) => {
-  const profilePicPath = apiUrl + "/" + reviewInfo.profilePicPath;
+  console.log(reviewInfo);
+  const profilePicPath = apiUrl + "/" + reviewInfo.profile.profilePicPath;
 
   return (
     <div className="td-review-container  ">
       <div className="td-review-header  ">
         <Link
-          to={`/profile/${reviewInfo.user_id}`}
+          to={`/profile/${reviewInfo.profile._id}`}
           style={{ textDecoration: "none" }}
         >
           <div className="td-profile-pic ">
@@ -19,10 +20,10 @@ const TrailReview = ({ reviewInfo }) => {
 
         <div className="td-profile-name">
           <Link
-            to={`/profile/${reviewInfo.user_id}`}
+            to={`/profile/${reviewInfo.profile._id}`}
             style={{ textDecoration: "none" }}
           >
-            <h2 id="profile-name">{reviewInfo.user_name}</h2>
+            <h2 id="profile-name">{reviewInfo.profile.name}</h2>
           </Link>
         </div>
       </div>
